@@ -1,7 +1,31 @@
 import type { Metadata } from "next";
-
+import localFont from "next/font/local";
 import "./globals.css";
 import { Space_Grotesk } from "next/font/google";
+
+const generalSans = localFont({
+  src: [
+    {
+      path: './fonts/GeneralSans-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/GeneralSans-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+        path:'./fonts/GeneralSans-Medium.woff2',
+        weight:'800',
+        style:'normal'
+    }
+    // Add more objects here if you have Medium, Semibold, etc.
+  ],
+  variable: '--font-general-sans' // This creates a CSS variable
+})
+
+
 
 export const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -23,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable}` + `${spaceGrotesk.className} bg-bgColor text-textColor`}
+        className={`${spaceGrotesk.variable}` + `${spaceGrotesk.className}  bg-bgColor text-textColor` + `${generalSans.variable}`}
       >
         {children}
       </body>
