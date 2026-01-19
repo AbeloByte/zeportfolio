@@ -29,7 +29,7 @@ const sizeClass = messageCardSizes[size];
 <div>
     {imageUrl && <Image src={imageUrl} alt="Robot Image"  width={94} height={96}  className=""/>}
 </div>
-<div className={  className + sizeClass + ` text-sm relative text-center  border font-space-grotesk text-black hover:cursor-pointer shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] transition-all active:translate-x-2 active:translate-y-2 active:shadow-none ${className} `}>{messageName}</div>
+<div className={  className + sizeClass + ` text-sm relative text-center  border font-space-grotesk border-black text-black hover:cursor-pointer shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] transition-all active:translate-x-2 active:translate-y-2 active:shadow-none ${className} `}>{messageName}</div>
   </div>;
 };
 
