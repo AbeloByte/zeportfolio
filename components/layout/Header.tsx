@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Logo from '../../public/Logo.svg';
 import Image from "next/image";
 import Button from "../UI/Button";
+import Container from "./Container";
 //  types for navigation items
 
 interface NavItem {
@@ -29,8 +30,10 @@ const Header = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-  <header className="mx-auto font-space-grotesk bg-bgColor text-textColor sticky top-0 z-40 mt-5">
-   <div className="flex items-center justify-evenly px-4 py-4 md:px-6 gap-4 md:gap-8">
+
+  <header className="font-space-grotesk bg-bgColor text-textColor sticky top-0 z-40 mt-5 ">
+      <Container className="">
+   <div className="flex items-center justify-between  py-4  gap-4 md:gap-8">
 
     <Link href="/" className="flex items-center gap-3">
       <Image src={Logo} alt="Logo" width={128} height={36} priority className="h-9 w-auto" />
@@ -89,10 +92,10 @@ const Header = () => {
         ))}
       </ul>
    </nav>
+   </Container>
+  </header>
 
-
-
-  </header>);
+  );
 };
 
 export default Header;
