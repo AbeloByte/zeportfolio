@@ -18,10 +18,11 @@ interface NavItem {
 
 
 const navItems: NavItem[] = [
-  { label: 'About', href: '/about' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Services', href: '/services' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Blogs', href: '#blogs' },
+  { label: 'Contact', href: '#contact' },
 ];
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ const Header = () => {
 
   return (
 
-  <header className="font-space-grotesk bg-bgColor text-textColor sticky top-0 z-40 mt-5 ">
+  <header className="font-space-grotesk  text-textColor sticky top-0 z-40 mt-5 bg-black/50 backdrop-blur-md transition-all">
       <Container className="">
    <div className="flex items-center justify-between  py-4  gap-4 md:gap-8">
 
@@ -69,7 +70,7 @@ const Header = () => {
     </nav>
 
 
-    <Button label="Let's Talk" size="md" className="hidden md:inline-flex" onClick={() => { window.location.href = '/contact'; }} />
+    <Button label="Let's Talk" size="md" className="hidden md:inline-flex" onClick={() => { window.location.href = '#contact'; }} />
 
    </div>
 

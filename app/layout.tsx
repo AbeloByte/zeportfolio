@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Space_Grotesk } from "next/font/google";
 
+
 const generalSans = localFont({
   src: [
     {
@@ -49,6 +50,7 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable}` + `${spaceGrotesk.className}  bg-bgColor text-textColor` + `${generalSans.variable}`}
       >
+
         {children}
       </body>
     </html>
