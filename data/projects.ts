@@ -4,26 +4,26 @@ export const projects: Project[] = [
   {
     id: 1,
     title: "Amazon Clone",
-    description: "He built an Amazon clone to practice creating a large, multi-page interface, focusing on layout, product listings, and basic user flows.",
+    description: "built an Amazon clone to practice creating a large, multi-page interface, focusing on layout, product listings, and basic user flows.",
     image: "/Projects/amazonClone.svg",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-    github: "https://github.com/username/task-manager",
-    demo: "https://task-demo.com"
+    tags: ["React", "JavaScript", "CSS"],
+    github: "https://github.com/AbeloByte/Amazon-Frontend",
+    demo: "https://amazon-frontend-delta.vercel.app/"
   },
  {
     id: 2,
     title: "Expense Scout Landing Page",
-    description: " Built a landing page for Expense Scout, focusing on clear structure, readable layout, and a simple user  journey.",
+    description: "built a landing page for Expense Scout, focusing on clear structure, readable layout, and a simple user journey.",
     image: "/Projects/ExpenseScout.svg",
     tags: ["Next.js", "TypeScript", "Tailwind"],
-    github: "https://github.com/username/ai-task-manager",
-    demo: "https://ai-task-manager-demo.com"
+    github: "https://github.com/AbeloByte/Expense-Tracker-Landing-Page",
+    demo: "https://expense-tracker-landing-page.vercel.app/"
   },
  {
     id: 3,
     title: "AI Task Manager",
     description: "He built an Amazon clone to practice creating a large, multi-page interface, focusing on layout, product listings, and basic user flows.",
-    image: "/projects/task-manager.png",
+    image: "/Projects/amazonClone.svg",
     tags: ["Next.js", "TypeScript", "Tailwind"],
     github: "https://github.com/username/task-manager",
     demo: "https://task-demo.com"
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     id: 4,
     title: "AI Task Manager",
     description: "He built an Amazon clone to practice creating a large, multi-page interface, focusing on layout, product listings, and basic user flows",
-    image: "/projects/task-manager.png",
+    image: "/Projects/ExpenseScout.svg",
     tags: ["Next.js", "TypeScript", "Tailwind"],
     github: "https://github.com/username/task-manager",
     demo: "https://task-demo.com"
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     id: 5,
     title: "Expense Scout Landing Page",
     description: " Built a landing page for Expense Scout, focusing on clear structure, readable layout, and a simple user  journey.",
-    image: "/Projects/ExpenseScout.svg",
+    image: "/Projects/amazonClone.svg",
     tags: ["Next.js", "TypeScript", "Tailwind"],
     github: "https://github.com/username/ai-task-manager",
     demo: "https://ai-task-manager-demo.com"
@@ -50,7 +50,7 @@ export const projects: Project[] = [
     id: 6,
     title: "Amazon Clone",
     description: "He built an Amazon clone to practice creating a large, multi-page interface, focusing on layout, product listings, and basic user flows.",
-    image: "/Projects/amazonClone.svg",
+    image: "/Projects/ExpenseScout.svg",
     tags: ["Next.js", "TypeScript", "Tailwind"],
     github: "https://github.com/username/task-manager",
     demo: "https://task-demo.com"
