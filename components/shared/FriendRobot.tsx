@@ -25,7 +25,7 @@ const FriendRobot = ({imageUrl, messageName, className, size = "lg"}: jituRobot)
 
 
 const sizeClass = messageCardSizes[size];
-  return <div className={`flex flex-col items-center gap-0 -space-y-10 `}>
+  return <div className={`flex-col items-center gap-0 -space-y-10 hidden md:block `}>
 <div>
     {imageUrl && <Image src={imageUrl} alt="Robot Image"  width={94} height={96}  className=""/>}
 </div>
