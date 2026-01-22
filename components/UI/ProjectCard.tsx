@@ -20,7 +20,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
     className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-100 transition-all duration-200"
   >
     <Image
-      src="/icons/github.svg"
+      src="/Icons/github.svg"
       alt="GitHub"
       width={20}
       height={20}
@@ -35,7 +35,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-100 transition-all duration-200"
     >
       <Image
-        src="/icons/external-link.svg"
+        src="/Icons/external-link.svg"
         alt="Live Demo"
         width={20}
         height={20}
