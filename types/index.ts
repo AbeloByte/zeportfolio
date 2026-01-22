@@ -20,12 +20,12 @@ export interface Experience {
 }
 
 export interface Blog {
-  id: number;
   title: string;
   description: string;
   date: string;
   imageUrl: string;
-  slug: string; // The URL path for the "Read More" link
+  slug: string;
+  content?: string;  // Raw MDX content for rendering
 }
 
 export interface ContactLink {

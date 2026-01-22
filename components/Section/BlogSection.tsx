@@ -1,7 +1,9 @@
-import { blogs } from "@/data/blogs";
-import BlogCard from "@/components/UI//BlogCard";
+import { getAllBlogs } from "@/lib/mdx";
+import BlogCard from "@/components/UI/BlogCard";
 
 export default function BlogSection() {
+  const blogs = getAllBlogs();
+
   return (
     <section className="bg-black py-20 px-6 " id="blogs">
       <div className="max-w-7xl mx-auto">
@@ -13,7 +15,7 @@ export default function BlogSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-px bg-transparent justify-items-center">
            {/* gap-px with bg-gray-800 creates those thin professional divider lines */}
           {blogs.map((blog) => (
-            <BlogCard key={blog.id} blog={blog} />
+            <BlogCard key={blog.slug} blog={blog} />
           ))}
         </div>
       </div>

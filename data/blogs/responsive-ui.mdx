@@ -1,0 +1,38 @@
+---
+title: "Building Responsive UI the Hard (But Useful) Way"
+description: "Notes from fixing layout issues, testing across devices, and why small details matter in UI."
+date: "12 Dec 2025"
+imageUrl: "/Blogs/blog-2.svg"
+---
+
+# Building Responsive UI the Hard Way
+
+Responsive design sounds simple in theory: use media queries, set breakpoints, done. But in practice, I've learned that building truly responsive UIs requires much more attention to detail.
+
+## The Device Testing Reality
+
+I used to rely on browser dev tools to test responsiveness. That changed when I saw my "perfect" layouts broken on actual devices:
+
+- **iOS Safari** handles viewport differently than Chrome
+- **Android devices** have wildly different screen densities
+- **Tablets** are often forgotten but still widely used
+
+## Lessons Learned
+
+### 1. Mobile-First Actually Works
+
+Starting with the smallest screen and progressively adding complexity saves a lot of headaches.
+
+### 2. Use Relative Units
+
+`rem` and `em` for typography, `%` and `vw/vh` for layout—these scale better than fixed pixels.
+
+### 3. Test Early, Test Often
+
+Don't wait until the end to check responsiveness. Build with flexibility in mind from day one.
+
+## What I Do Now
+
+- Test on real devices when possible
+- Use container queries for component-level responsiveness
+- Keep a checklist of common breakpoints to verify
