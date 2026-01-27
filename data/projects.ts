@@ -21,12 +21,12 @@ export const projects: Project[] = [
   },
  {
     id: 3,
-    title: "AI Task Manager",
-    description: "He built an Amazon clone to practice creating a large, multi-page interface, focusing on layout, product listings, and basic user flows.",
+    title: "Garage Management System (GMS)",
+    description: "Built a full-stack Garage Management System to digitize garage operations, reduce paperwork, and enable real-time service tracking.",
     image: "/Projects/amazonClone.svg",
     tags: ["Next.js", "TypeScript", "Tailwind"],
-    github: "https://github.com/username/task-manager",
-    demo: "https://task-demo.com"
+    github: "https://github.com/AbeloByte/Garage-App",
+    // demo: "https://task-demo.com"
   },
  {
     id: 4,
