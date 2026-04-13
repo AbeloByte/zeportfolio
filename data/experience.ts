@@ -12,7 +12,7 @@ export const experiences: Experience[] = [
   {
     id: 2,
     dateRange: "Jun - August 2025",
-    role: "Frontend Developer Intern",
+    role: "UI Designer and Frontend Developer Intern",
     description: "I worked as a web development intern, contributing to real-world projects , learn and collaborating with a team of developers. My work focused on building responsive interfaces, integrating APIs, and improving the usability of web pages. This experience strengthened my problem-solving skills, teamwork, and confidence",
     technologies: ["Web Development", "Google Doc"]
   },
