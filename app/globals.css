@@ -10,3 +10,7 @@
     --color-bodyTextColor: #D7D4D4;
     --color-experiencebodyText: #675E5E;
 }
+
+html {
+  scroll-behavior: smooth;
+}

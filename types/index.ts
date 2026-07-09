@@ -1,5 +1,5 @@
 
-export type TechStack = "Next.js" | "TypeScript" | "Tailwind" | "React" | "Node.js / Express" | "MongoDB" | "JavaScript" | "HTML" | "CSS" | "Git" | "GitHub" | "Figma";
+export type TechStack = "Next.js" | "TypeScript" | "Tailwind" | "React" | "Node.js / Express" | "MongoDB" | "JavaScript" | "HTML" | "CSS" | "Git" | "GitHub" | "Figma" | "Convex";
 
 export interface Project {
   id: number;
@@ -13,10 +13,13 @@ export interface Project {
 
 export interface Experience {
   id: number;
-  dateRange: string;      // e.g., "April - August 2025"
-  role: string;           // e.g., "Software Developer Intern"
+  dateRange: string;
+  role: string;
+  company: string;
+  location: string;
+  workType: "Remote" | "On-site" | "Hybrid";
   description: string;
-  technologies: string[]; // e.g., ["React.js", "Tailwind CSS"]
+  technologies: string[];
 }
 
 export interface Blog {

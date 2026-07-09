@@ -10,7 +10,7 @@ export default function ContactSection() {
         <Container className="bg-white p-6 md:px-10 md:pt-10 md:pb-16">
 
           <p className="text-xl md:text-2xl font-mono mb-12 max-w-2xl text-bgColor selection:bg-[#DFFF00] selection:text-black">
-            Abel is always open to conversations, feedback, and new opportunities.
+            I am always open to conversations, feedback, and new opportunities.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

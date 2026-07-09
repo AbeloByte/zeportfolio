@@ -30,31 +30,25 @@ export const projects: Project[] = [
   },
  {
     id: 4,
-    title: "AI Task Manager",
-    description: "He built an Amazon clone to practice creating a large, multi-page interface, focusing on layout, product listings, and basic user flows",
-    image: "/Projects/ExpenseScout.svg",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-    github: "https://github.com/username/task-manager",
-    demo: "https://task-demo.com"
+    title: "Linkoch",
+  description:
+    "The easiest way to find and save the best websites on the internet. Keep all your favorite links in one place and access them from any device.",
+  image: "/Projects/Linkooch.png",
+  tags: ["Next.js", "TypeScript", "Tailwind", "Convex"],
+  github: "https://github.com/AbeloByte/Linkoch",
+  demo: "https://linkoch.vercel.app/"
   },
   {
     id: 5,
-    title: "Expense Scout Landing Page",
-    description: " Built a landing page for Expense Scout, focusing on clear structure, readable layout, and a simple user  journey.",
-    image: "/Projects/amazonClone.svg",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-    github: "https://github.com/username/ai-task-manager",
-    demo: "https://ai-task-manager-demo.com"
+   title: "Hustle Gym Management",
+    description:
+      "A modern platform to manage gym members, attendance, subscriptions, and operations.",
+    image: "/Projects/Freespace.png",
+    tags: ["Next.js", "TypeScript", "Tailwind", "Node.js / Express"],
+    github: "https://github.com/AbeloByte/Hustle-Gym-Management",
+    demo: "https://hustle-front.vercel.app/"
   },
-    {
-    id: 6,
-    title: "Amazon Clone",
-    description: "He built an Amazon clone to practice creating a large, multi-page interface, focusing on layout, product listings, and basic user flows.",
-    image: "/Projects/ExpenseScout.svg",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-    github: "https://github.com/username/task-manager",
-    demo: "https://task-demo.com"
-  },
+    
 
 
 ];

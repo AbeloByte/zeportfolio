@@ -44,6 +44,7 @@ const Hero = () => {
         }, 35);
         return () => clearTimeout(timeout);
       } else {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsDeleting(false);
         setCurrentIndex((prev) => (prev + 1) % titles.length);
       }
@@ -58,7 +59,7 @@ const Hero = () => {
         {/* Left: full width on mobile, half on desktop */}
         <div className="flex flex-col gap-8 justify-center w-full md:w-1/2">
           <div className="flex flex-col gap-5">
-            <h1 className="font-general-sans text-3xl sm:text-4xl lg:text-4xl text-gray-900 dark:text-white leading-snug">
+            <h1 className="font-general-sans text-3xl sm:text-4xl lg:text-4xl text-white leading-snug">
               Hi, I&apos;m Abel
             </h1>
 
@@ -75,8 +76,24 @@ const Hero = () => {
             </p>
           </div>
 
-          <div>
-            <Button label="View My Projects" size="lg" />
+          <div className="flex items-center gap-4">
+            <Button
+              label="View My Projects"
+              size="lg"
+              onClick={() => { window.location.href = '#projects'; }}
+            />
+            <a
+              href="/cv/Abel_Adane_CV.pdf"
+              download
+              className="inline-flex items-center gap-2 px-4 py-2 border border-white/30 text-textColor text-base font-space-grotesk hover:border-primaryColor hover:text-primaryColor transition-all duration-300"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Download CV
+            </a>
           </div>
         </div>
 
