@@ -3,7 +3,7 @@ import Container from "../layout/Container";
 import Image from "next/image";
 
 const stats = [
-  { value: "4+", label: "Years of Experience" },
+  { value: "4+", label: "Years in Tech" },
   { value: "10+", label: "Projects Built" },
   { value: "∞", label: "Coffee Consumed" },
 ];
@@ -12,9 +12,18 @@ const roles = ["Software Developer","Full-Stack Developer", "UI/UX Designer"];
 
 const About = () => {
   return (
-    <div className="bg-white py-16" id="about">
+    <div className="relative bg-white py-16 overflow-hidden" id="about">
+      {/* Noise texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.18]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "180px 180px",
+        }}
+      />
       <Container>
-        <div className="flex flex-col gap-10 md:gap-16 lg:gap-20 items-center md:items-start md:flex-row w-full">
+        <div className="relative z-10 flex flex-col gap-10 md:gap-16 lg:gap-20 items-center md:items-start md:flex-row w-full">
 
           {/* ── Image column ── */}
           <div className="shrink-0 flex flex-col items-center gap-8">
