@@ -82,16 +82,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         ))}
       </div>
 
-      {/* View project link */}
-      {project.demo && (
-        <Link
-          href={project.demo}
-          target="_blank"
-          className="text-sm text-white/40 hover:text-primaryColor transition-colors font-mono mt-1 inline-flex items-center gap-1.5"
-        >
-          View project <span className="text-base leading-none">→</span>
-        </Link>
-      )}
+
 
     </div>
   );
