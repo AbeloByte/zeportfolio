@@ -15,7 +15,7 @@ const socialLinks = [
   { label: "GitHub", href: "http://github.com/AbeloByte", icon: "/Icons/github.svg" },
   { label: "LinkedIn", href: "http://linkedin.com/in/abel-adane-268938350/", icon: "/Icons/linkedin.svg" },
   { label: "X / Twitter", href: "https://x.com/Hebel07", icon: "/Icons/x.svg" },
-  { label: "Email", href: "mailto:abel.adane27@gmail.com", icon: "/Icons/gmail.svg" },
+  { label: "Email", href: "mailto:defaultpath19@gmail.com", icon: "/Icons/gmail.svg" },
 ];
 
 export default function Footer() {
@@ -24,7 +24,7 @@ export default function Footer() {
   return (
     <footer className="bg-black text-white font-space-grotesk">
       <Container>
-        <div className="py-12 flex flex-col md:flex-row gap-10 justify-between items-start  -mt-6 md:-mt-12">
+        <div className="py-12 flex flex-col md:flex-row gap-10 justify-between items-start  -mt-8 md:-mt-12">
 
           {/* Brand */}
           <div className="flex flex-col gap-4 max-w-xs">

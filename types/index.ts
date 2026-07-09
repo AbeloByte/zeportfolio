@@ -1,5 +1,5 @@
 
-export type TechStack = "Next.js" | "TypeScript" | "Tailwind" | "React" | "Node.js / Express" | "MongoDB" | "JavaScript" | "HTML" | "CSS" | "Git" | "GitHub" | "Figma" | "Convex";
+export type TechStack = "Next.js" | "TypeScript" | "Tailwind" | "React" | "Node.js / Express" | "MongoDB" | "JavaScript" | "HTML" | "CSS" | "Git" | "GitHub" | "Figma" | "Convex" | "Bootstrap";
 
 export interface Project {
   id: number;

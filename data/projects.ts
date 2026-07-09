@@ -23,8 +23,8 @@ export const projects: Project[] = [
     id: 3,
     title: "Garage Management System (GMS)",
     description: "Built a full-stack Garage Management System to digitize garage operations, reduce paperwork, and enable real-time service tracking.",
-    image: "/Projects/amazonClone.svg",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
+    image: "/Projects/AbeGarage.png",
+    tags: ["React", "Node.js / Express", "Bootstrap"],
     github: "https://github.com/AbeloByte/Garage-App",
     // demo: "https://task-demo.com"
   },
