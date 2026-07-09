@@ -23,7 +23,9 @@ export const metadata: Metadata = {
   title: "Abel Adane | Portfolio",
   description: "Personal portfolio of Abel Adane — Full Stack Web Developer & Junior UI/UX Designer",
   icons: {
-    icon: '/Icons/favicon.ico',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
   },
 };
 

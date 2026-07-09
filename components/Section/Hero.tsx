@@ -6,7 +6,7 @@ import FriendRobot from "../shared/FriendRobot";
 import Image from "next/image";
 import Container from "../layout/Container";
 
-const titles = ["Full Stack Web Developer", "Junior UI/UX Designer", "Frontend Engineer"];
+const titles = ["Full Stack Web Developer", "Junior UI/UX Designer", "Software Developer"];
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -83,8 +83,9 @@ const Hero = () => {
               onClick={() => { window.location.href = '#projects'; }}
             />
             <a
-              href="/cv/Abel_Adane_CV.pdf"
-              download
+              href="https://drive.google.com/file/d/1X_q8e8kGmlyqDlZULYyJ8a5bZIotcmRj/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 border border-white/30 text-textColor text-base font-space-grotesk hover:border-primaryColor hover:text-primaryColor transition-all duration-300"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

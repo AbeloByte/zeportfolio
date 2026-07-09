@@ -16,7 +16,7 @@ const FeaturedProjects = () => {
         {/* Header row */}
         <div className="flex items-center justify-between mb-12">
           <h1 className="text-2xl md:text-4xl font-semibold text-white font-space-grotesk">
-            Projects
+            Featured Projects
           </h1>
 
           {/* Toggle buttons */}

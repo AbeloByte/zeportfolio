@@ -22,24 +22,24 @@ const ProjectRow = ({ project, index }: Props) => {
           <h3 className="text-lg md:text-xl font-semibold font-space-grotesk text-white group-hover:text-primaryColor transition-colors">
             {project.title}
           </h3>
-          {/* Links */}
-          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          {/* Links — always visible on mobile, hover-reveal on desktop */}
+          <div className="flex items-center gap-2">
             <Link
               href={project.github}
               target="_blank"
-              className="text-white/60 hover:text-primaryColor transition-colors"
+              className="opacity-60 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:opacity-100"
               aria-label="GitHub"
             >
-              <Image src="/Icons/github.svg" alt="GitHub" width={16} height={16} className="invert opacity-60 hover:opacity-100 transition-opacity" />
+              <Image src="/Icons/github.svg" alt="GitHub" width={16} height={16} className="invert" />
             </Link>
             {project.demo && (
               <Link
                 href={project.demo}
                 target="_blank"
-                className="text-white/60 hover:text-primaryColor transition-colors"
+                className="opacity-60 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:opacity-100"
                 aria-label="Live demo"
               >
-                <Image src="/Icons/external-link.svg" alt="Live Demo" width={16} height={16} className="invert opacity-60 hover:opacity-100 transition-opacity" />
+                <Image src="/Icons/external-link.svg" alt="Live Demo" width={16} height={16} className="invert" />
               </Link>
             )}
           </div>

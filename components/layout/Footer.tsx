@@ -24,7 +24,7 @@ export default function Footer() {
   return (
     <footer className="bg-black text-white font-space-grotesk">
       <Container>
-        <div className="py-12 flex flex-col md:flex-row gap-10 justify-between items-start -mt-12">
+        <div className="py-12 flex flex-col md:flex-row gap-10 justify-between items-start  -mt-6 md:-mt-12">
 
           {/* Brand */}
           <div className="flex flex-col gap-4 max-w-xs">

@@ -8,7 +8,7 @@ const stats = [
   { value: "∞", label: "Coffee Consumed" },
 ];
 
-const roles = ["Software Engineer","Full-Stack Developer", "UI/UX Designer"];
+const roles = ["Software Developer","Full-Stack Developer", "UI/UX Designer"];
 
 const About = () => {
   return (
@@ -67,7 +67,7 @@ const About = () => {
 
             {/* Body */}
             <p className="text-sm sm:text-base text-experiencebodyText leading-[1.8]">
-              I&apos;m a Full-Stack Developer and Computer Science student who enjoys turning ideas into intuitive digital experiences. My work combines thoughtful interface design with scalable backend architecture, letting me build products that are both visually appealing and technically reliable.
+              I&apos;m a Software Developer and Full-Stack Developer who enjoys turning ideas into intuitive digital experiences. My work combines thoughtful interface design with scalable backend architecture, letting me build products that are both visually appealing and technically reliable.
             </p>
             <p className="text-sm sm:text-base text-experiencebodyText leading-[1.8]">
               Beyond writing clean, maintainable code, I&apos;m passionate about understanding users and solving real-world problems. Recently I&apos;ve been expanding my skills in UI/UX design to create products that not only work well but also feel effortless to use.
@@ -76,8 +76,9 @@ const About = () => {
             {/* CTAs — same shadow style as Button component */}
             <div className="flex flex-wrap gap-4 pt-2">
               <a
-                href="/cv/Abel_Adane_CV.pdf"
-                download
+                href="YOUR_GOOGLE_DRIVE_LINK_HERE"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-bgColor text-white text-sm font-space-grotesk font-medium shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] transition-all active:translate-x-2 active:translate-y-2 active:shadow-none"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
