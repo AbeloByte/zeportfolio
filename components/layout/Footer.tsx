@@ -15,7 +15,7 @@ const socialLinks = [
   { label: "GitHub", href: "http://github.com/AbeloByte", icon: "/Icons/github.svg" },
   { label: "LinkedIn", href: "http://linkedin.com/in/abel-adane-268938350/", icon: "/Icons/linkedin.svg" },
   { label: "X / Twitter", href: "https://x.com/Hebel07", icon: "/Icons/x.svg" },
-  { label: "Email", href: "mailto:defaultpath19@gmail.com", icon: "/Icons/gmail.svg" },
+  { label: "Email", href: "mailto:abel.adane27@gmail.com", icon: "/Icons/gmail.svg" },
 ];
 
 export default function Footer() {
