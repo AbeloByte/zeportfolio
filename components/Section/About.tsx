@@ -8,7 +8,6 @@ const About = () => {
       <Container>
         <div className="flex flex-col gap-10 md:gap-16 lg:gap-24 items-center md:items-start md:flex-row relative w-full">
 
-          {/* Image — larger and proportional */}
           <div className="shrink-0">
             <Image
               src="/images/personal_image.png"
@@ -19,7 +18,6 @@ const About = () => {
             />
           </div>
 
-          {/* Text content — first person, focused */}
           <div className="flex flex-col justify-center gap-6 w-full">
             <h3 className="font-space-grotesk text-2xl md:text-4xl font-semibold text-bgColor">About</h3>
             <p className="text-sm sm:text-base text-bgColor leading-relaxed">

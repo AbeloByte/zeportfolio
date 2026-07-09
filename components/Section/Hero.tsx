@@ -32,7 +32,10 @@ const Hero = () => {
         }, 60);
         return () => clearTimeout(timeout);
       } else {
-        setIsPaused(true);
+        const timeout = setTimeout(() => {
+          setIsPaused(true);
+        }, 0);
+        return () => clearTimeout(timeout);
       }
     } else {
       if (displayed.length > 0) {
@@ -55,7 +58,7 @@ const Hero = () => {
         {/* Left: full width on mobile, half on desktop */}
         <div className="flex flex-col gap-8 justify-center w-full md:w-1/2">
           <div className="flex flex-col gap-5">
-            <h1 className="font-general-sans text-3xl sm:text-4xl lg:text-4xl text-white leading-snug">
+            <h1 className="font-general-sans text-3xl sm:text-4xl lg:text-4xl text-gray-900 dark:text-white leading-snug">
               Hi, I&apos;m Abel
             </h1>
 
