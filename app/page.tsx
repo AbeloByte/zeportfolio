@@ -1,4 +1,5 @@
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import About from "@/components/Section/About";
 import BlogSection from "@/components/Section/BlogSection";
 import ContactSection from "@/components/Section/ContactSection";
@@ -15,8 +16,9 @@ export default function Home() {
         <About/>
         <FeaturedProjects />
         <ExperienceSection/>
-        <BlogSection/>
+        {/* <BlogSection/> */}
         <ContactSection/>
+        <Footer />
     </div>
   );
 }
