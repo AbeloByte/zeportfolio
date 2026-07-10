@@ -2,35 +2,57 @@ import React from "react";
 import Image from "next/image";
 
 const messageCardSizes = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-6 py-5 text-base w-[199px] h-[82px]',
+  sm: 'px-3 py-1.5 text-sm w-[160px]',
+  md: 'px-4 py-4 text-sm w-[220px]',
   lg: 'px-4 py-2 text-base',
   xl: 'px-10 py-5 text-xl',
-} as const; // 'as const' makes the keys "read-only" and specific
-
+} as const;
 
 type MessageCardSize = keyof typeof messageCardSizes;
 
-interface jituRobot extends React.HTMLAttributes<HTMLDivElement> {
-    imageUrl?:string;
-    messageName:string;
-    className?:string;
-    size?: MessageCardSize;
-
+interface FriendRobotProps extends React.HTMLAttributes<HTMLDivElement> {
+  imageUrl?: string;
+  messageName: string;
+  className?: string;
+  size?: MessageCardSize;
+  fading?: boolean;
 }
 
+const FriendRobot = ({ imageUrl, messageName, className = "", size = "lg", fading = false }: FriendRobotProps) => {
+  const sizeClass = messageCardSizes[size];
 
+  return (
+    <div className="hidden md:flex flex-col items-center -space-y-10">
+      {/* Robot image */}
+      {imageUrl && (
+        <Image src={imageUrl} alt="Robot" width={94} height={96} />
+      )}
 
-const FriendRobot = ({imageUrl, messageName, className, size = "lg"}: jituRobot) => {
-
-
-const sizeClass = messageCardSizes[size];
-  return <div className={`flex-col items-center gap-0 -space-y-10 hidden md:block `}>
-<div>
-    {imageUrl && <Image src={imageUrl} alt="Robot Image"  width={94} height={96}  className=""/>}
-</div>
-<div className={  className + sizeClass + ` text-sm relative text-center  border font-space-grotesk border-black text-black hover:cursor-pointer shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] transition-all active:translate-x-2 active:translate-y-2 active:shadow-none ${className} `}>{messageName}</div>
-  </div>;
+      {/* Message bubble */}
+      <div
+        className={`
+          ${sizeClass} ${className}
+          relative text-center font-space-grotesk text-sm text-black
+          border border-black
+          shadow-[4px_4px_0px_0px_rgba(234,255,0,1)]
+          hover:translate-x-0.5 hover:translate-y-0.5
+          hover:shadow-[4px_4px_0px_0px_rgba(234,255,0,1)]
+          active:translate-x-2 active:translate-y-2 active:shadow-none
+          transition-all duration-300
+          flex items-center justify-center
+        `}
+        style={{
+          opacity: fading ? 0 : 1,
+          transform: fading ? "translateY(4px)" : "translateY(0)",
+          transition: "opacity 1s ease, transform 0.1s ease",
+        }}
+      >
+        {/* Quote mark */}
+        <span className="absolute top-1 left-2 text-primaryColor text-lg leading-none font-serif select-none">&ldquo;</span>
+        <p className="leading-snug px-2">{messageName}</p>
+      </div>
+    </div>
+  );
 };
 
 export default FriendRobot;

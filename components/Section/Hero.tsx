@@ -8,12 +8,26 @@ import Container from "../layout/Container";
 
 const titles = ["Full Stack Web Developer", "Junior UI/UX Designer", "Software Developer"];
 
+const quotes = [
+  "Build things. Break things. Learn always.",
+  "Every expert was once a beginner.",
+  "Ship it. Iterate. Grow.",
+  "The best time to start was yesterday.",
+  "Discipline beats motivation every time.",
+  "Small steps compound into great journeys.",
+  "Stay curious. Stay humble. Stay building.",
+];
+
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [quoteFading, setQuoteFading] = useState(false);
+
+  // Typewriter effect
   useEffect(() => {
     const current = titles[currentIndex];
 
@@ -51,16 +65,27 @@ const Hero = () => {
     }
   }, [displayed, isDeleting, isPaused, currentIndex]);
 
+  // Quote cycling with fade
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setQuoteFading(true);
+      setTimeout(() => {
+        setQuoteIndex((prev) => (prev + 1) % quotes.length);
+        setQuoteFading(false);
+      }, 400);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Container>
-      {/* items-center so both halves share the same vertical midpoint */}
       <div className="flex flex-row items-center h-screen gap-12">
 
         {/* Left: full width on mobile, half on desktop */}
         <div className="flex flex-col gap-8 justify-center w-full md:w-1/2">
           <div className="flex flex-col gap-5">
             <h1 className="font-general-sans text-3xl sm:text-4xl lg:text-4xl text-white leading-snug">
-              Hi, I&apos;m Abel
+              Hi, I&apos;m Abel Adane
             </h1>
 
             {/* Animated title */}
@@ -100,17 +125,18 @@ const Hero = () => {
 
         {/* Right: hidden on mobile, half on desktop */}
         <div className="hidden md:flex w-1/2 items-center justify-center h-full relative pt-8">
-          {/* FriendRobot — top right */}
+          {/* FriendRobot with dynamic quote */}
           <div className="absolute top-8 right-0">
             <FriendRobot
               imageUrl="/robotimages/hey.svg"
-              messageName="Hey there! Welcome  I'm Abel's tiny Robot"
+              messageName={quotes[quoteIndex]}
+              fading={quoteFading}
               size="md"
               className="bg-white border-white"
             />
           </div>
 
-          {/* Hero image — centered in its half */}
+          {/* Hero image */}
           <Image
             src="/images/personal_image.png"
             alt="Abel"
