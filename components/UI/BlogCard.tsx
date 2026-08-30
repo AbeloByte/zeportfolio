@@ -1,15 +1,22 @@
 // src/components/BlogCard.tsx
+"use client";
+
 import { Blog } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function BlogCard({ blog }: { blog: Blog }) {
   return (
-    <div className="md:w-94.5 flex flex-col bg-black  text-white overflow-hidden border  border-gray-700 transition-all h-full">
+    <motion.div
+      whileHover={{ y: -6 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="group md:w-94.5 flex flex-col bg-black text-white overflow-hidden border border-gray-700 hover:border-[#DFFF00]/50 transition-colors h-full"
+    >
 
       {/* Top Content: Text Padding */}
       <div className="p-6 flex-1 flex flex-col">
-        <h3 className="text-xl font-bold leading-tight mb-4 font-mono">
+        <h3 className="text-xl font-bold leading-tight mb-4 font-mono group-hover:text-[#DFFF00] transition-colors">
           {blog.title}
         </h3>
         <p className="text-gray-400 text-sm mb-8 line-clamp-3">
@@ -34,9 +41,9 @@ export default function BlogCard({ blog }: { blog: Blog }) {
           src={blog.imageUrl}
           alt={blog.title}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
       </div>
-    </div>
+    </motion.div>
   );
 }

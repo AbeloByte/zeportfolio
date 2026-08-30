@@ -46,7 +46,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
       {/* Hero Header */}
       <div className="relative">
         {/* Background gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black z-10" />
+        <div className="absolute inset-0 bg-linear-to-b from-black via-black/90 to-black z-10" />
 
         {/* Featured Image as background */}
         <div className="absolute inset-0 opacity-20">

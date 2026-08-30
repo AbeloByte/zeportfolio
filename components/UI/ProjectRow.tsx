@@ -1,6 +1,9 @@
+"use client";
+
 import { Project } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface Props {
   project: Project;
@@ -9,10 +12,14 @@ interface Props {
 
 const ProjectRow = ({ project, index }: Props) => {
   return (
-    <div className="group flex items-center gap-6 md:gap-10 border-b border-white/10 py-8 hover:bg-white/5 transition-colors px-2 -mx-2">
+    <motion.div
+      whileHover={{ x: 8 }}
+      transition={{ type: "spring", stiffness: 320, damping: 26 }}
+      className="group flex items-center gap-6 md:gap-10 border-b border-white/10 py-8 hover:bg-white/5 transition-colors px-2 -mx-2"
+    >
 
       {/* Number */}
-      <span className="text-3xl md:text-4xl font-bold font-mono text-primaryColor shrink-0 w-10 md:w-14 leading-none">
+      <span className="text-3xl md:text-4xl font-bold font-mono text-primaryColor shrink-0 w-10 md:w-14 leading-none transition-transform duration-300 group-hover:scale-110">
         {String(index + 1).padStart(2, "0")}
       </span>
 
@@ -68,11 +75,11 @@ const ProjectRow = ({ project, index }: Props) => {
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+          className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
         />
       </div>
 
-    </div>
+    </motion.div>
   );
 };
 

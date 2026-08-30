@@ -31,10 +31,22 @@ export default function Button({
 
   return (
     <button
-      className={`relative bg-white border font-space-grotesk border-white text-black hover:cursor-pointer shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] transition-all active:translate-x-2 active:translate-y-2 active:shadow-none ${sizeClass} ${className}`}
+      className={`group relative overflow-hidden bg-white border font-space-grotesk font-medium border-white text-black cursor-pointer
+        shadow-[4px_4px_0px_0px_var(--color-primaryColor)]
+        hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_var(--color-primaryColor)]
+        active:translate-x-1 active:translate-y-1 active:shadow-none
+        transition-all duration-300 ease-out-expo ${sizeClass} ${className}`}
       {...props}
     >
-      {label}
+      {/* Lime wipe that fills the button from the bottom on hover */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 origin-bottom scale-y-0 bg-primaryColor
+          transition-transform duration-500 ease-out-expo group-hover:scale-y-100"
+      />
+      <span className="relative z-10 flex items-center justify-center gap-2 whitespace-nowrap">
+        {label}
+      </span>
     </button>
   );
 }

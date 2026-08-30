@@ -2,6 +2,7 @@ import { contactLinks } from "@/data/contact";
 import ContactCard from "@/components/UI/ContactCard";
 import Image from "next/image";
 import Container from "../layout/Container";
+import { Reveal, Stagger, StaggerItem } from "../motion";
 
 export default function ContactSection() {
   return (
@@ -9,17 +10,21 @@ export default function ContactSection() {
       <div className="md:p-12">
         <Container className="bg-white p-6 md:px-10 md:pt-10 md:pb-16">
 
-          <p className="text-xl md:text-2xl font-mono mb-12 max-w-2xl text-bgColor selection:bg-[#DFFF00] selection:text-black">
-            I am always open to conversations, feedback, and new opportunities.
-          </p>
+          <Reveal>
+            <p className="text-xl md:text-2xl font-mono mb-12 max-w-2xl text-bgColor selection:bg-[#DFFF00] selection:text-black">
+              I am always open to conversations, feedback, and new opportunities.
+            </p>
+          </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <Stagger stagger={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactLinks.map((link) => (
-              <ContactCard key={link.id} link={link} />
+              <StaggerItem key={link.id}>
+                <ContactCard link={link} />
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
-          {/* Mobile robot */}
+          {/* Mobile robot — intentionally static */}
           <div className="flex justify-center mt-8 md:hidden">
             <div className="relative w-40 h-36">
               <Image
@@ -34,7 +39,7 @@ export default function ContactSection() {
 
         </Container>
 
-        {/* Desktop robot */}
+        {/* Desktop robot — intentionally static */}
         <div className="hidden md:flex justify-center relative -mt-20">
           <div className="relative w-[450px] h-96">
             <Image

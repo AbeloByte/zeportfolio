@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../public/Logo.svg";
 import Container from "./Container";
+import { Stagger, StaggerItem, HoverShift } from "../motion";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -24,50 +25,52 @@ export default function Footer() {
   return (
     <footer className="bg-black text-white font-space-grotesk">
       <Container>
-        <div className="py-12 flex flex-col md:flex-row gap-10 justify-between items-start  -mt-8 md:-mt-12">
+        <Stagger stagger={0.12} className="py-12 flex flex-col md:flex-row gap-10 justify-between items-start  -mt-8 md:-mt-12">
 
           {/* Brand */}
-          <div className="flex flex-col gap-4 max-w-xs">
+          <StaggerItem className="flex flex-col gap-4 max-w-xs">
             <Link href="/">
               <Image src={Logo} alt="Abel Adane Logo" width={120} height={34} className="h-8 w-auto" />
             </Link>
             <p className="text-bodyTextColor text-sm leading-relaxed">
               Full Stack Web Developer & Junior UI/UX Designer building clean, user-centered digital experiences.
             </p>
-          </div>
+          </StaggerItem>
 
           {/* Nav links */}
-          <div className="flex flex-col gap-3">
+          <StaggerItem className="flex flex-col gap-3">
             <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-1">Navigation</p>
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-bodyTextColor text-sm hover:text-primaryColor transition-colors"
-              >
-                {link.label}
-              </Link>
+              <HoverShift key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-bodyTextColor text-sm hover:text-primaryColor transition-colors"
+                >
+                  {link.label}
+                </Link>
+              </HoverShift>
             ))}
-          </div>
+          </StaggerItem>
 
           {/* Social links */}
-          <div className="flex flex-col gap-3">
+          <StaggerItem className="flex flex-col gap-3">
             <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-1">Connect</p>
             {socialLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-bodyTextColor text-sm hover:text-primaryColor transition-colors"
-              >
-                <Image src={link.icon} alt={link.label} width={16} height={16} className="w-4 h-4 invert opacity-60" />
-                {link.label}
-              </a>
+              <HoverShift key={link.href}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-bodyTextColor text-sm hover:text-primaryColor transition-colors"
+                >
+                  <Image src={link.icon} alt={link.label} width={16} height={16} className="w-4 h-4 invert opacity-60" />
+                  {link.label}
+                </a>
+              </HoverShift>
             ))}
-          </div>
+          </StaggerItem>
 
-        </div>
+        </Stagger>
 
         {/* Bottom bar */}
         <div className="border-t border-white/10 py-5 flex flex-col sm:flex-row gap-2 items-center justify-between text-xs text-white/40">

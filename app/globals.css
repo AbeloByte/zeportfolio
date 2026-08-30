@@ -3,14 +3,139 @@
 @theme {
     --font-space-grotesk: 'Space Grotesk', ui-sans-serif, system-ui;
     --font-general-sans: 'General Sans', ui-sans-serif, system-ui;
+
+    /* Brand */
     --color-bgColor: #060606;
     --color-textColor: #FFFFFF;
     --color-hoverText: #DFFF00;
     --color-primaryColor: #DFFF00;
     --color-bodyTextColor: #D7D4D4;
     --color-experiencebodyText: #675E5E;
+
+    /* Surfaces — a small elevation ladder above the near-black page */
+    --color-surface: #0B0B0B;
+    --color-surfaceRaised: #121212;
+    --color-hairline: rgba(255, 255, 255, 0.08);
+    --color-hairlineStrong: rgba(255, 255, 255, 0.16);
+
+    /* One easing curve for every CSS transition on the site */
+    --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Fluid type scale ─────────────────────────────
+   Sizes track the viewport so headings stay in
+   proportion without a ladder of breakpoints.     */
+
+@utility text-display {
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+@utility text-display-sm {
+  font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+@utility text-section {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+/* ── Surface treatments ────────────────────────── */
+
+/* Frosted panel — used by the header and floating chips. */
+@utility glass {
+  /* Lightning CSS adds the -webkit- prefix from the browser targets;
+     writing it by hand here makes it drop the standard property. */
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Lime bloom behind hero art and hovered cards. */
+@utility glow-primary {
+  box-shadow: 0 0 90px -25px rgba(223, 255, 0, 0.45);
+}
+
+@utility glow-primary-sm {
+  box-shadow: 0 0 40px -18px rgba(223, 255, 0, 0.5);
+}
+
+/* Text that fades from white into the brand lime. */
+@utility text-gradient {
+  background-image: linear-gradient(105deg, #FFFFFF 0%, #FFFFFF 45%, #DFFF00 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* A 1px rule that fades out at both ends. */
+@utility rule-fade {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.14) 20%,
+    rgba(255, 255, 255, 0.14) 80%,
+    transparent
+  );
+}
+
+/* Faint grid, sits behind dark sections. */
+@utility grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ── Scrollbar ─────────────────────────────────── */
+
+::selection {
+  background-color: rgba(223, 255, 0, 0.85);
+  color: #060606;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #060606;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.14);
+    border: 3px solid #060606;
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(223, 255, 0, 0.6);
+  }
+}
+
+/* Honour the OS "reduce motion" setting for the CSS-driven transitions.
+   Framer Motion components handle this themselves via useReducedMotion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

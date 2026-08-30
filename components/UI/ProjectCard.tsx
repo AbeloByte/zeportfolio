@@ -1,10 +1,17 @@
+"use client";
+
 import { Project } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
-    <div className="group relative px-5 py-6 w-full max-w-sm h-full bg-black border border-white/10 flex flex-col gap-4 transition-all duration-300 hover:border-transparent">
+    <motion.div
+      whileHover={{ y: -6 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="group relative px-5 py-6 w-full max-w-sm h-full bg-black border border-white/10 flex flex-col gap-4 transition-colors duration-300 hover:border-transparent"
+    >
 
       {/* ── Corner bracket borders (appear on hover) ── */}
       {/* Top-left */}
@@ -34,7 +41,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+          className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
         />
       </div>
 
@@ -84,7 +91,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
 
 
-    </div>
+    </motion.div>
   );
 };
 

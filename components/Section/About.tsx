@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../layout/Container";
 import Image from "next/image";
+import { Reveal, Stagger, StaggerItem, StaggerTag } from "../motion";
 
 const stats = [
   { value: "4+", label: "Years in Tech" },
@@ -26,7 +27,7 @@ const About = () => {
         <div className="relative z-10 flex flex-col gap-10 md:gap-16 lg:gap-20 items-center md:items-start md:flex-row w-full">
 
           {/* ── Image column ── */}
-          <div className="shrink-0 flex flex-col items-center gap-8">
+          <Reveal direction="right" distance={40} className="shrink-0 flex flex-col items-center gap-8">
             <Image
               src="/images/personal_image.png"
               alt="Abel Adane"
@@ -36,54 +37,61 @@ const About = () => {
             />
 
             {/* Stats — same tag style as the rest of the site */}
-            <div className="flex gap-3">
+            <Stagger stagger={0.1} delay={0.2} className="flex gap-3">
               {stats.map((s) => (
-                <div
+                <StaggerItem
                   key={s.label}
+                  whileHover={{ y: -4 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   className="flex flex-col items-center gap-1 border-b-4 border-primaryColor px-4 py-3 bg-bgColor text-white"
                 >
                   <span className="text-lg font-bold font-space-grotesk leading-none">{s.value}</span>
                   <span className="text-[10px] font-mono text-bodyTextColor text-center leading-tight">{s.label}</span>
-                </div>
+                </StaggerItem>
               ))}
-            </div>
-          </div>
+            </Stagger>
+          </Reveal>
 
           {/* ── Text column ── */}
-          <div className="flex flex-col gap-6 w-full max-w-[620px]">
+          <Stagger stagger={0.1} className="flex flex-col gap-6 w-full max-w-[620px]">
 
             {/* Heading — matches other sections */}
-            <h2 className="text-2xl md:text-4xl font-bold font-space-grotesk text-bgColor">
-              About
-            </h2>
+            <StaggerItem>
+              <h2 className="text-2xl md:text-4xl font-bold font-space-grotesk text-bgColor">
+                About
+              </h2>
+            </StaggerItem>
 
             {/* Role tags — same style as ExperienceItem tech tags */}
-            <div className="flex flex-wrap gap-3">
+            <Stagger stagger={0.07} className="flex flex-wrap gap-3">
               {roles.map((role) => (
-                <span
+                <StaggerTag
                   key={role}
+                  whileHover={{ y: -3 }}
                   className="bg-black text-white px-4 py-1 text-sm font-mono border-b-4 border-[#DFFF00]"
                 >
                   {role}
-                </span>
+                </StaggerTag>
               ))}
-            </div>
+            </Stagger>
 
             {/* Lead */}
-            <p className="text-base font-medium text-bgColor leading-relaxed">
-              Building products that combine clean engineering with thoughtful design.
-            </p>
+            <StaggerItem>
+              <p className="text-base font-medium text-bgColor leading-relaxed">
+                Building products that combine clean engineering with thoughtful design.
+              </p>
+            </StaggerItem>
 
             {/* Body */}
-            <p className="text-sm sm:text-base text-experiencebodyText leading-[1.8]">
-              I&apos;m a Software Developer and Full-Stack Developer who enjoys turning ideas into intuitive digital experiences. My work combines thoughtful interface design with scalable backend architecture, letting me build products that are both visually appealing and technically reliable.
-            </p>
-            <p className="text-sm sm:text-base text-experiencebodyText leading-[1.8]">
+            <StaggerItem><p className="text-sm sm:text-base text-experiencebodyText leading-[1.8]">
+              I&apos;m Software Developer with a focus on full-stack development, who enjoys turning ideas into intuitive digital experiences. My work combines thoughtful interface design with scalable backend architecture, letting me build products that are both visually appealing and technically reliable.
+            </p></StaggerItem>
+            <StaggerItem><p className="text-sm sm:text-base text-experiencebodyText leading-[1.8]">
               Beyond writing clean, maintainable code, I&apos;m passionate about understanding users and solving real-world problems. Recently I&apos;ve been expanding my skills in UI/UX design to create products that not only work well but also feel effortless to use.
-            </p>
+            </p></StaggerItem>
 
             {/* CTAs — same shadow style as Button component */}
-            <div className="flex flex-wrap gap-4 pt-2">
+            <StaggerItem className="flex flex-wrap gap-4 pt-2">
               <a
                 href="YOUR_GOOGLE_DRIVE_LINK_HERE"
                 target="_blank"
@@ -103,9 +111,9 @@ const About = () => {
               >
                 Contact Me
               </a>
-            </div>
+            </StaggerItem>
 
-          </div>
+          </Stagger>
 
         </div>
       </Container>
