@@ -22,7 +22,7 @@ export const projects: Project[] = [
     },
     {
         id: 3,
-        title: "Garage Management System (GMS)",
+        title: "GMS",
         description:
             "Built a full-stack Garage Management System to digitize garage operations, reduce paperwork, and enable real-time service tracking.",
         image: "/Projects/AbeGarage.png",
@@ -42,12 +42,22 @@ export const projects: Project[] = [
     },
     {
         id: 5,
-        title: "Hustle Gym Management",
+        title: "FreeSpace",
         description:
             "A modern platform to manage gym members, attendance, subscriptions, and operations.",
         image: "/Projects/freespace1.png",
         tags: ["Next.js", "TypeScript", "Tailwind", "Node.js / Express"],
         github: "https://github.com/AbeloByte/Hustle-Gym-Management",
         demo: "https://hustle-front.vercel.app/",
+    },
+    {
+        id: 6,
+        title: "Leword",
+        description:
+            "Catch the words you meet in movies, shows, and books — and actually keep them.",
+        image: "/Projects/leword.png",
+        tags: ["Next.js", "TypeScript", "Tailwind"],
+        github: "https://github.com/AbeloByte/Leword",
+        demo: "https://leword-nu.vercel.app/",
     },
 ];
