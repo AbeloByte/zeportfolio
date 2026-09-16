@@ -9,7 +9,7 @@ import { Reveal, Stagger, StaggerItem } from "../motion";
 import { AnimatePresence, motion } from "framer-motion";
 
 const FeaturedProjects = () => {
-  const [view, setView] = useState<"grid" | "row">("grid");
+  const [view, setView] = useState<"grid" | "row">("row");
 
   return (
     <div className="py-16 bg-bgColor" id="projects">
@@ -25,9 +25,26 @@ const FeaturedProjects = () => {
           <div className="flex items-center border border-white/20">
             <motion.button
               whileTap={{ scale: 0.9 }}
+              onClick={() => setView("row")}
+              aria-label="List view"
+              className={`p-2.5 transition-colors ${
+                view === "row"
+                  ? "bg-primaryColor text-bgColor"
+                  : "text-white/50 hover:text-white"
+              }`}
+            >
+              {/* Row icon */}
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="2" width="16" height="3" fill="currentColor"/>
+                <rect x="1" y="8" width="16" height="3" fill="currentColor"/>
+                <rect x="1" y="14" width="16" height="3" fill="currentColor"/>
+              </svg>
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.9 }}
               onClick={() => setView("grid")}
               aria-label="Grid view"
-              className={`p-2.5 transition-colors ${
+              className={`p-2.5 transition-colors border-l border-white/20 ${
                 view === "grid"
                   ? "bg-primaryColor text-bgColor"
                   : "text-white/50 hover:text-white"
@@ -39,23 +56,6 @@ const FeaturedProjects = () => {
                 <rect x="11" y="1" width="6" height="6" fill="currentColor"/>
                 <rect x="1" y="11" width="6" height="6" fill="currentColor"/>
                 <rect x="11" y="11" width="6" height="6" fill="currentColor"/>
-              </svg>
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setView("row")}
-              aria-label="List view"
-              className={`p-2.5 transition-colors border-l border-white/20 ${
-                view === "row"
-                  ? "bg-primaryColor text-bgColor"
-                  : "text-white/50 hover:text-white"
-              }`}
-            >
-              {/* Row icon */}
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="2" width="16" height="3" fill="currentColor"/>
-                <rect x="1" y="8" width="16" height="3" fill="currentColor"/>
-                <rect x="1" y="14" width="16" height="3" fill="currentColor"/>
               </svg>
             </motion.button>
           </div>
