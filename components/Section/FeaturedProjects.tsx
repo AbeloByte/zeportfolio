@@ -1,69 +1,97 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import ProjectCard from "../UI/ProjectCard";
 import ProjectRow from "../UI/ProjectRow";
 import { projects } from "@/data/projects";
 import Container from "../layout/Container";
 import { Reveal, Stagger, StaggerItem } from "../motion";
 import RobotStop from "../shared/RobotStop";
-import { AnimatePresence, motion } from "framer-motion";
+import { Grain } from "../shared/Storybook";
+import projectsRobot from "@/public/images/projects-robot.png";
+
+/* ────────────────────────────────────────────────
+   Projects — storybook vibe.
+   Pale sky paper, the robot inspecting the work
+   with a magnifying glass, and each project as a
+   sketchbook page with a taped-in screenshot.
+   ──────────────────────────────────────────────── */
+
+const views = [
+  { id: "row", label: "List" },
+  { id: "grid", label: "Grid" },
+] as const;
 
 const FeaturedProjects = () => {
   const [view, setView] = useState<"grid" | "row">("row");
 
   return (
-    <div className="py-16 bg-bgColor" id="projects">
-      <Container>
+    <section id="projects" className="relative overflow-hidden bg-[#E3EDF2] py-20 md:py-28">
+      <Grain tone="sky" opacity={0.28} />
+
+      <Container className="relative">
         <div className="hidden md:flex justify-start mb-6">
           <RobotStop id="projects" />
         </div>
 
-        {/* Header row */}
-        <Reveal className="flex items-center justify-between mb-12">
-          <h1 className="text-2xl md:text-4xl font-semibold text-white font-space-grotesk">
-            Featured Projects
-          </h1>
+        {/* Header: words on the left, the inspecting robot on the right */}
+        <div className="mb-12 grid items-end gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,420px)]">
+          <Reveal>
+            <p className="font-script text-2xl text-dusk/75 -rotate-1">things i&apos;ve made</p>
+            <h2
+              className="mt-1 font-display font-semibold lowercase leading-[0.88] text-dusk"
+              style={{ fontSize: "clamp(3.25rem, 7vw, 5.75rem)" }}
+            >
+              selected work.
+            </h2>
+            <p className="mt-5 max-w-md font-general-sans text-base leading-relaxed text-dusk/75">
+              Landing pages, dashboards and full-stack apps. Each one taught me something new.
+            </p>
 
-          {/* Toggle buttons */}
-          <div className="flex items-center border border-white/20">
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setView("row")}
-              aria-label="List view"
-              className={`p-2.5 transition-colors ${
-                view === "row"
-                  ? "bg-primaryColor text-bgColor"
-                  : "text-white/50 hover:text-white"
-              }`}
-            >
-              {/* Row icon */}
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="2" width="16" height="3" fill="currentColor"/>
-                <rect x="1" y="8" width="16" height="3" fill="currentColor"/>
-                <rect x="1" y="14" width="16" height="3" fill="currentColor"/>
-              </svg>
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setView("grid")}
-              aria-label="Grid view"
-              className={`p-2.5 transition-colors border-l border-white/20 ${
-                view === "grid"
-                  ? "bg-primaryColor text-bgColor"
-                  : "text-white/50 hover:text-white"
-              }`}
-            >
-              {/* Grid icon */}
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="6" height="6" fill="currentColor"/>
-                <rect x="11" y="1" width="6" height="6" fill="currentColor"/>
-                <rect x="1" y="11" width="6" height="6" fill="currentColor"/>
-                <rect x="11" y="11" width="6" height="6" fill="currentColor"/>
-              </svg>
-            </motion.button>
-          </div>
-        </Reveal>
+            {/* View toggle — small caps with a hand-drawn underline */}
+            <div className="mt-8 flex items-center gap-6" role="group" aria-label="Project layout">
+              {views.map((v) => (
+                <button
+                  key={v.id}
+                  type="button"
+                  onClick={() => setView(v.id)}
+                  aria-pressed={view === v.id}
+                  className={`relative py-1 text-[11px] font-semibold uppercase tracking-[0.28em] transition-colors ${
+                    view === v.id ? "text-dusk" : "text-dusk/55 hover:text-dusk"
+                  }`}
+                >
+                  {v.label}
+                  {view === v.id && (
+                    <motion.svg
+                      layoutId="view-squiggle"
+                      viewBox="0 0 60 8"
+                      preserveAspectRatio="none"
+                      className="pointer-events-none absolute -bottom-2 left-0 h-2 w-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      aria-hidden
+                    >
+                      <path d="M1 5.5 C 10 2, 18 7, 28 4.2 S 47 2.2, 59 4.8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                    </motion.svg>
+                  )}
+                </button>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal direction="left" distance={40} className="relative mx-auto w-full max-w-[420px]">
+            <Image
+              src={projectsRobot}
+              alt="Abel's tiny robot inspecting floating browser windows through a big magnifying glass"
+              sizes="(min-width: 768px) 420px, 85vw"
+              className="h-auto w-full select-none"
+            />
+            <p aria-hidden className="absolute -bottom-3 right-2 font-script text-lg text-dusk/70 rotate-[-4deg]">
+              quality check in progress…
+            </p>
+          </Reveal>
+        </div>
 
         <AnimatePresence mode="wait" initial={false}>
           {view === "grid" ? (
@@ -71,11 +99,11 @@ const FeaturedProjects = () => {
               key="grid"
               stagger={0.08}
               exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+              className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
             >
-              {projects.map((item) => (
+              {projects.map((item, index) => (
                 <StaggerItem key={item.id} className="h-full">
-                  <ProjectCard project={item} />
+                  <ProjectCard project={item} index={index} />
                 </StaggerItem>
               ))}
             </Stagger>
@@ -84,19 +112,18 @@ const FeaturedProjects = () => {
               key="row"
               stagger={0.06}
               exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
-              className="flex flex-col"
+              className="flex flex-col gap-5"
             >
               {projects.map((item, index) => (
-                <StaggerItem key={item.id} direction="left" distance={32}>
+                <StaggerItem key={item.id} direction="up" distance={24}>
                   <ProjectRow project={item} index={index} />
                 </StaggerItem>
               ))}
             </Stagger>
           )}
         </AnimatePresence>
-
       </Container>
-    </div>
+    </section>
   );
 };
 

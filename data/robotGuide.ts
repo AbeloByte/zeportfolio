@@ -30,7 +30,7 @@ export interface GuideStop {
 export const guideScript = {
   home: {
     label: "Hello",
-    surface: "dark",
+    surface: "light",
     pose: "wave",
     lines: [
       "Hey there! Welcome. I'm Abel's tiny robot.",
@@ -53,7 +53,7 @@ export const guideScript = {
     actions: [{ label: "His work →", href: "#projects" }],
   },
   projects: {
-    surface: "dark",
+    surface: "light",
     label: "Projects",
     pose: "point",
     lines: [
@@ -79,7 +79,7 @@ export const guideScript = {
     actions: [{ label: "Say hi →", href: "#contact" }],
   },
   blogs: {
-    surface: "dark",
+    surface: "light",
     label: "Blogs",
     pose: "point",
     lines: [

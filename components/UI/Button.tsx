@@ -31,7 +31,7 @@ export default function Button({
 
   return (
     <button
-      className={`group relative overflow-hidden bg-white border font-space-grotesk font-medium border-white text-black cursor-pointer
+      className={`group relative overflow-hidden bg-ink border font-space-grotesk font-medium border-ink text-white hover:text-ink cursor-pointer
         shadow-[4px_4px_0px_0px_var(--color-primaryColor)]
         hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_var(--color-primaryColor)]
         active:translate-x-1 active:translate-y-1 active:shadow-none

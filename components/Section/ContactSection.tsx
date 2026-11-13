@@ -1,64 +1,78 @@
+import Image from "next/image";
 import { contactLinks } from "@/data/contact";
 import ContactCard from "@/components/UI/ContactCard";
-import Image from "next/image";
 import Container from "../layout/Container";
 import { Reveal, Stagger, StaggerItem } from "../motion";
 import RobotStop from "../shared/RobotStop";
+import { Grain } from "../shared/Storybook";
+import contactRobot from "@/public/images/contact-robot.png";
+
+/* ────────────────────────────────────────────────
+   Contact — storybook vibe, back under the sky.
+   Bookends the hero: cream headline on blue, the
+   robot sending paper airplanes, contact links as
+   paper index cards.
+   ──────────────────────────────────────────────── */
 
 export default function ContactSection() {
   return (
-    <section className="bg-[#F5F5F5] overflow-x-clip" id="contact">
-      <div className="md:p-12">
-        <Container className="bg-white p-6 md:px-10 md:pt-10 md:pb-16">
+    <section
+      id="contact"
+      className="relative overflow-hidden bg-sky py-20 md:py-28"
+      style={{ backgroundImage: "linear-gradient(180deg, #6CA6C6 0%, #4A8DB5 45%, #3C7FAA 100%)" }}
+    >
+      <Grain tone="sky" opacity={0.4} />
 
-          <div className="hidden md:flex justify-start mb-6">
-            <RobotStop id="contact" />
-          </div>
-
-          <Reveal>
-            <p className="text-xl md:text-2xl font-mono mb-12 max-w-2xl text-bgColor selection:bg-[#DFFF00] selection:text-black">
-              I am always open to conversations, feedback, and new opportunities.
-            </p>
-          </Reveal>
-
-          <Stagger stagger={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactLinks.map((link) => (
-              <StaggerItem key={link.id}>
-                <ContactCard link={link} />
-              </StaggerItem>
-            ))}
-          </Stagger>
-
-          {/* Mobile robot — intentionally static */}
-          <div className="flex justify-center mt-8 md:hidden">
-            <div className="relative w-40 h-36">
-              <Image
-                src="/images/robotContact.svg"
-                alt="Robot Character"
-                fill
-                sizes="160px"
-                className="object-contain"
-              />
-            </div>
-          </div>
-
-        </Container>
-
-        {/* Desktop robot — intentionally static */}
-        <div className="hidden md:flex justify-center relative -mt-20">
-          <div className="relative w-[450px] h-96">
-            <Image
-              src="/images/robotContact.svg"
-              alt="Robot Character"
-              fill
-              priority
-              sizes="450px"
-              className="object-contain object-bottom"
-            />
-          </div>
+      <Container className="relative">
+        <div className="hidden md:flex justify-start mb-6">
+          <RobotStop id="contact" />
         </div>
 
-      </div>
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+          {/* ── Words + cards ── */}
+          <div className="flex flex-col gap-8">
+            <Reveal>
+              <p className="font-script text-2xl text-dusk/85 -rotate-1">the end of the tour, the start of something?</p>
+              <h2
+                className="mt-1 font-display font-semibold lowercase leading-[0.86] text-cream"
+                style={{ fontSize: "clamp(3.5rem, 8vw, 6.75rem)" }}
+              >
+                let&apos;s make
+                <br />
+                something.
+              </h2>
+              <p className="mt-6 max-w-lg font-general-sans text-base leading-relaxed text-dusk sm:text-lg">
+                I&apos;m always open to conversations, feedback and new opportunities. My inbox is the fastest way to reach me.
+              </p>
+            </Reveal>
+
+            {/* 1px gaps over the line colour draw the dividers between cards */}
+            <Stagger
+              stagger={0.08}
+              className="grid grid-cols-1 gap-px overflow-hidden rounded-md border border-creamLine bg-creamLine shadow-[0_18px_40px_-20px_rgba(19,40,58,0.55)] sm:grid-cols-2"
+            >
+              {contactLinks.map((link) => (
+                <StaggerItem key={link.id} className="bg-cream">
+                  <ContactCard link={link} />
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+
+          {/* ── The robot sending paper airplanes ── */}
+          <Reveal direction="left" distance={40} className="relative mx-auto w-full max-w-[460px]">
+            <Image
+              src={contactRobot}
+              alt="Abel's tiny robot happily throwing paper airplanes from a grassy hill"
+              sizes="(min-width: 1024px) 460px, 80vw"
+              className="h-auto w-full select-none"
+            />
+            <p aria-hidden className="absolute -bottom-2 left-4 font-script text-xl text-dusk/85 -rotate-3">
+              your message, on its way
+            </p>
+          </Reveal>
+        </div>
+      </Container>
     </section>
   );
 }
