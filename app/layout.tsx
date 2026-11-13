@@ -42,10 +42,14 @@ const typewriter = Courier_Prime({
 export const metadata: Metadata = {
   title: "Abel Adane | Portfolio",
   description: "Personal portfolio of Abel Adane — Full Stack Web Developer & Junior UI/UX Designer",
+  // "a." favicon, matching the "abel adane." wordmark
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
     ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },
 };
 
