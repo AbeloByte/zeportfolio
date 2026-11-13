@@ -4,10 +4,12 @@ import { Project } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { robotHint } from "@/data/robotGuide";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <motion.div
+      data-robot-say={robotHint.project(project)}
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
       className="group relative px-5 py-6 w-full max-w-sm h-full bg-black border border-white/10 flex flex-col gap-4 transition-colors duration-300 hover:border-transparent"

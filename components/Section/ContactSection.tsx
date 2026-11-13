@@ -3,12 +3,17 @@ import ContactCard from "@/components/UI/ContactCard";
 import Image from "next/image";
 import Container from "../layout/Container";
 import { Reveal, Stagger, StaggerItem } from "../motion";
+import RobotStop from "../shared/RobotStop";
 
 export default function ContactSection() {
   return (
     <section className="bg-[#F5F5F5] overflow-x-clip" id="contact">
       <div className="md:p-12">
         <Container className="bg-white p-6 md:px-10 md:pt-10 md:pb-16">
+
+          <div className="hidden md:flex justify-start mb-6">
+            <RobotStop id="contact" />
+          </div>
 
           <Reveal>
             <p className="text-xl md:text-2xl font-mono mb-12 max-w-2xl text-bgColor selection:bg-[#DFFF00] selection:text-black">

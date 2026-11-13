@@ -4,11 +4,13 @@
 import { ContactLink } from "@/types";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { robotHint } from "@/data/robotGuide";
 
 export default function ContactCard({ link }: { link: ContactLink }) {
   return (
     <motion.a
       href={link.url}
+      data-robot-say={robotHint.contact(link)}
       target="_blank"
       whileHover={{ y: -6 }}
       whileTap={{ y: 0, scale: 0.98 }}

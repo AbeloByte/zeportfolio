@@ -139,3 +139,48 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Tiny robot (components/shared/RobotAvatar.tsx) ── */
+
+@keyframes robot-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  96%           { transform: scaleY(0.1); }
+}
+.robot-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: robot-blink 4.2s infinite;
+}
+
+@keyframes robot-wave {
+  0%, 100% { transform: rotate(-140deg); }
+  50%      { transform: rotate(-172deg); }
+}
+.robot-wave { animation: robot-wave 0.9s ease-in-out infinite; }
+
+@keyframes robot-talk {
+  0%, 100% { transform: scaleY(0.6); }
+  50%      { transform: scaleY(2); }
+}
+.robot-talk {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: robot-talk 0.24s ease-in-out infinite;
+}
+
+@keyframes robot-led {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+.robot-led { animation: robot-led 1.6s ease-in-out infinite; }
+
+@keyframes robot-dot {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 1; }
+}
+.robot-dot { animation: robot-dot 1.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .robot-blink, .robot-wave, .robot-talk, .robot-led, .robot-dot { animation: none; }
+  .robot-wave { transform: rotate(-150deg); }
+}

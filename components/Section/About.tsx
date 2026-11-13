@@ -2,6 +2,8 @@ import React from "react";
 import Container from "../layout/Container";
 import Image from "next/image";
 import { Reveal, Stagger, StaggerItem, StaggerTag } from "../motion";
+import { robotHint } from "@/data/robotGuide";
+import RobotStop from "../shared/RobotStop";
 
 const stats = [
   { value: "4+", label: "Years in Tech" },
@@ -24,6 +26,9 @@ const About = () => {
         }}
       />
       <Container>
+        <div className="relative z-10 hidden md:flex justify-end mb-6">
+          <RobotStop id="about" />
+        </div>
         <div className="relative z-10 flex flex-col gap-10 md:gap-16 lg:gap-20 items-center md:items-start md:flex-row w-full">
 
           {/* ── Image column ── */}
@@ -94,6 +99,7 @@ const About = () => {
             <StaggerItem className="flex flex-wrap gap-4 pt-2">
               <a
                 href="YOUR_GOOGLE_DRIVE_LINK_HERE"
+                data-robot-say={robotHint.cv}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-bgColor text-white text-sm font-space-grotesk font-medium shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(234,255,0,1)] transition-all active:translate-x-2 active:translate-y-2 active:shadow-none"

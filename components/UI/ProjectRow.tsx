@@ -4,6 +4,7 @@ import { Project } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { robotHint } from "@/data/robotGuide";
 
 interface Props {
   project: Project;
@@ -13,6 +14,7 @@ interface Props {
 const ProjectRow = ({ project, index }: Props) => {
   return (
     <motion.div
+      data-robot-say={robotHint.project(project)}
       whileHover={{ x: 8 }}
       transition={{ type: "spring", stiffness: 320, damping: 26 }}
       className="group flex items-center gap-6 md:gap-10 border-b border-white/10 py-8 hover:bg-white/5 transition-colors px-2 -mx-2"

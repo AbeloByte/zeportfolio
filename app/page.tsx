@@ -6,6 +6,7 @@ import ContactSection from "@/components/Section/ContactSection";
 import ExperienceSection from "@/components/Section/ExperienceSection";
 import FeaturedProjects from "@/components/Section/FeaturedProjects";
 import Hero from "@/components/Section/Hero";
+import RobotGuide from "@/components/shared/RobotGuide";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <ExperienceSection />
       <ContactSection />
       <Footer />
+      <RobotGuide />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { experiences } from "@/data/experience";
 import Container from "../layout/Container";
 import { Reveal, Stagger, StaggerItem, StaggerTag, Grow, Pop } from "../motion";
+import RobotStop from "../shared/RobotStop";
 
 const workTypeBadge: Record<string, string> = {
   "Remote":  "bg-black-50 text-black border border-black-200",
@@ -12,6 +13,9 @@ export default function ExperienceSection() {
   return (
     <section className="bg-white py-16" id="experience">
       <Container>
+        <div className="hidden md:flex justify-end mb-6">
+          <RobotStop id="experience" />
+        </div>
         <Reveal>
           <h2 className="text-2xl md:text-4xl font-bold mb-12 text-bgColor font-space-grotesk">
             Experience

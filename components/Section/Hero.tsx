@@ -2,32 +2,20 @@
 
 import React, { useState, useEffect } from "react";
 import Button from "../UI/Button";
-import FriendRobot from "../shared/FriendRobot";
+import RobotStop from "../shared/RobotStop";
 import Image from "next/image";
 import Container from "../layout/Container";
-import { Stagger, StaggerItem, Float } from "../motion";
+import { Stagger, StaggerItem } from "../motion";
 import { motion, useReducedMotion } from "framer-motion";
 
 const titles = ["Full Stack Web Developer", "Junior UI/UX Designer", "Software Developer"];
 
-const quotes = [
-  "Build things. Break things. Learn always.",
-  "Every expert was once a beginner.",
-  "Ship it. Iterate. Grow.",
-  "The best time to start was yesterday.",
-  "Discipline beats motivation every time.",
-  "Small steps compound into great journeys.",
-  "Stay curious. Stay humble. Stay building.",
-];
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-
-  const [quoteIndex, setQuoteIndex] = useState(0);
-  const [quoteFading, setQuoteFading] = useState(false);
 
   const reduced = useReducedMotion();
 
@@ -69,21 +57,10 @@ const Hero = () => {
     }
   }, [displayed, isDeleting, isPaused, currentIndex]);
 
-  // Quote cycling with fade
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setQuoteFading(true);
-      setTimeout(() => {
-        setQuoteIndex((prev) => (prev + 1) % quotes.length);
-        setQuoteFading(false);
-      }, 400);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <Container>
-      <div className="flex flex-row items-center h-screen gap-12">
+      <div id="home" className="flex flex-row items-center h-screen gap-12">
 
         {/* Left: full width on mobile, half on desktop */}
         <Stagger immediate stagger={0.12} delay={0.15} className="flex flex-col gap-8 justify-center w-full md:w-1/2">
@@ -134,23 +111,8 @@ const Hero = () => {
 
         {/* Right: hidden on mobile, half on desktop */}
         <div className="hidden md:flex w-1/2 items-center justify-center h-full relative pt-8">
-          {/* FriendRobot with dynamic quote */}
-          <motion.div
-            className="absolute top-8 right-0 z-10"
-            initial={reduced ? { opacity: 0 } : { opacity: 0, y: -24, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ type: "spring", stiffness: 200, damping: 18, delay: 0.7 }}
-          >
-            <Float amount={8} duration={5}>
-            <FriendRobot
-              imageUrl="/robotimages/hey.svg"
-              messageName={quotes[quoteIndex]}
-              fading={quoteFading}
-              size="md"
-              className="bg-white border-white"
-            />
-            </Float>
-          </motion.div>
+          {/* The tour robot starts here (rendered by <RobotGuide />) */}
+          <RobotStop id="home" className="absolute top-8 right-0 z-10" />
 
           {/* Hero image */}
           <motion.div

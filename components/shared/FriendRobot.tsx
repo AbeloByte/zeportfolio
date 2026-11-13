@@ -12,21 +12,23 @@ type MessageCardSize = keyof typeof messageCardSizes;
 
 interface FriendRobotProps extends React.HTMLAttributes<HTMLDivElement> {
   imageUrl?: string;
+  /** Custom robot (e.g. <RobotAvatar />) — used instead of imageUrl. */
+  avatar?: React.ReactNode;
   messageName: string;
   className?: string;
   size?: MessageCardSize;
   fading?: boolean;
 }
 
-const FriendRobot = ({ imageUrl, messageName, className = "", size = "lg", fading = false }: FriendRobotProps) => {
+const FriendRobot = ({ imageUrl, avatar, messageName, className = "", size = "lg", fading = false }: FriendRobotProps) => {
   const sizeClass = messageCardSizes[size];
 
   return (
     <div className="hidden md:flex flex-col items-center -space-y-10">
       {/* Robot image */}
-      {imageUrl && (
+      {avatar ?? (imageUrl && (
         <Image src={imageUrl} alt="Robot" width={94} height={96} />
-      )}
+      ))}
 
       {/* Message bubble */}
       <div

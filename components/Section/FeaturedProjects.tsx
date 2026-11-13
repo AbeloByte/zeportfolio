@@ -6,6 +6,7 @@ import ProjectRow from "../UI/ProjectRow";
 import { projects } from "@/data/projects";
 import Container from "../layout/Container";
 import { Reveal, Stagger, StaggerItem } from "../motion";
+import RobotStop from "../shared/RobotStop";
 import { AnimatePresence, motion } from "framer-motion";
 
 const FeaturedProjects = () => {
@@ -14,6 +15,9 @@ const FeaturedProjects = () => {
   return (
     <div className="py-16 bg-bgColor" id="projects">
       <Container>
+        <div className="hidden md:flex justify-start mb-6">
+          <RobotStop id="projects" />
+        </div>
 
         {/* Header row */}
         <Reveal className="flex items-center justify-between mb-12">
