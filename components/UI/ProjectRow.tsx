@@ -1,7 +1,6 @@
 "use client";
 
 import { Project } from "@/types";
-import { motion } from "framer-motion";
 import { robotHint } from "@/data/robotGuide";
 import { TapedPhoto } from "../shared/Storybook";
 import ProjectLinks from "./ProjectLinks";
@@ -14,11 +13,9 @@ interface Props {
 /** A project as a sketchbook page: number, title, note, tags, and a taped-in screenshot. */
 const ProjectRow = ({ project, index }: Props) => {
   return (
-    <motion.article
+    <article
       data-robot-say={robotHint.project(project)}
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 320, damping: 26 }}
-      className="group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-5 gap-y-5 rounded-md border border-creamLine bg-[#FBF6EA] p-5 shadow-[0_14px_30px_-22px_rgba(19,40,58,0.5)] sm:grid-cols-[auto_minmax(0,1fr)_auto] md:gap-x-8 md:p-7"
+      className="group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-5 gap-y-5 rounded-md border border-creamLine bg-[#FBF6EA] p-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] md:gap-x-8 md:p-7"
     >
       {/* Number */}
       <span aria-hidden className="self-start font-display text-5xl font-semibold leading-none text-dusk/25 md:text-6xl">
@@ -49,7 +46,7 @@ const ProjectRow = ({ project, index }: Props) => {
         sizes="240px"
         className="col-span-2 mx-auto w-full max-w-[280px] sm:col-span-1 sm:w-48 md:w-60"
       />
-    </motion.article>
+    </article>
   );
 };
 

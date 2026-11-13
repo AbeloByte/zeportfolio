@@ -1,7 +1,6 @@
 "use client";
 
 import { Project } from "@/types";
-import { motion } from "framer-motion";
 import { robotHint } from "@/data/robotGuide";
 import { TapedPhoto } from "../shared/Storybook";
 import ProjectLinks from "./ProjectLinks";
@@ -9,11 +8,9 @@ import ProjectLinks from "./ProjectLinks";
 /** Grid view: a paper card with the screenshot taped on top. */
 const ProjectCard = ({ project, index = 0 }: { project: Project; index?: number }) => {
   return (
-    <motion.article
+    <article
       data-robot-say={robotHint.project(project)}
-      whileHover={{ y: -6 }}
-      transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="group flex h-full flex-col gap-4 rounded-md border border-creamLine bg-[#FBF6EA] p-5 pt-7 shadow-[0_14px_30px_-22px_rgba(19,40,58,0.5)]"
+      className="group flex h-full flex-col gap-4 rounded-md border border-creamLine bg-[#FBF6EA] p-5 pt-7"
     >
       <TapedPhoto
         src={project.image}
@@ -34,7 +31,7 @@ const ProjectCard = ({ project, index = 0 }: { project: Project; index?: number 
         </div>
         <ProjectLinks project={project} />
       </div>
-    </motion.article>
+    </article>
   );
 };
 

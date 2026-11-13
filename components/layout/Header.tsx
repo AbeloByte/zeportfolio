@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
-import Image from "next/image";
-import Logo from '../../public/logo-story.svg';
+import Logo from "../shared/Logo";
 import Container from "./Container";
 import { motion, useScroll, useSpring, useReducedMotion, AnimatePresence } from "framer-motion";
 
@@ -139,7 +138,7 @@ const Header = () => {
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 320, damping: 18 }}
             >
-              <Image src={Logo} alt="Abel Adane" priority className={`w-auto transition-[height] duration-500 ease-out-expo ${scrolled ? 'h-7' : 'h-8'}`} />
+              <Logo size={scrolled ? 38 : 42} className="transition-[width,height] duration-500 ease-out-expo" />
             </motion.div>
           </Link>
 

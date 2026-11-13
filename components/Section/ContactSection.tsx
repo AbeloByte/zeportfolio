@@ -19,7 +19,7 @@ export default function ContactSection() {
     <section
       id="contact"
       className="relative overflow-hidden bg-sky py-20 md:py-28"
-      style={{ backgroundImage: "linear-gradient(180deg, #6CA6C6 0%, #4A8DB5 45%, #3C7FAA 100%)" }}
+      style={{ backgroundImage: "linear-gradient(180deg, #6CA6C6 0%, #4A8DB5 45%, #2F6F98 100%)" }}
     >
       <Grain tone="sky" opacity={0.4} />
 
@@ -49,7 +49,7 @@ export default function ContactSection() {
             {/* 1px gaps over the line colour draw the dividers between cards */}
             <Stagger
               stagger={0.08}
-              className="grid grid-cols-1 gap-px overflow-hidden rounded-md border border-creamLine bg-creamLine shadow-[0_18px_40px_-20px_rgba(19,40,58,0.55)] sm:grid-cols-2"
+              className="grid grid-cols-1 gap-px overflow-hidden rounded-md border border-creamLine bg-creamLine sm:grid-cols-2"
             >
               {contactLinks.map((link) => (
                 <StaggerItem key={link.id} className="bg-cream">

@@ -41,15 +41,15 @@ export function TapedPhoto({
 }) {
   return (
     <div
-      className={`relative transition-transform duration-500 ease-out group-hover:rotate-0 group-hover:scale-[1.02] ${className}`}
+      className={`relative ${className}`}
       style={{ rotate: `${tilt}deg` }}
     >
       {/* tape */}
       <span
         aria-hidden
-        className="absolute -top-2.5 left-1/2 z-10 h-5 w-16 -translate-x-1/2 -rotate-3 border border-[#E2D3A8]/70 bg-[#F3E7C4]/85 shadow-sm"
+        className="absolute -top-2.5 left-1/2 z-10 h-5 w-16 -translate-x-1/2 -rotate-3 border border-[#E2D3A8]/70 bg-[#F3E7C4]/85"
       />
-      <div className="bg-white p-1.5 shadow-[0_10px_22px_-12px_rgba(19,40,58,0.55)]">
+      <div className="border border-creamLine bg-white p-1.5">
         <div className="relative aspect-[16/10] overflow-hidden bg-[#EFE6D2]">
           <Image src={src} alt={alt} fill sizes={sizes} className="object-cover object-top" />
         </div>
