@@ -1,114 +1,91 @@
 import { experiences } from "@/data/experience";
 import Container from "../layout/Container";
-import { Reveal, Stagger, StaggerItem, StaggerTag, Grow, Pop } from "../motion";
+import { Reveal, Stagger, StaggerItem, Grow, Pop } from "../motion";
 import RobotStop from "../shared/RobotStop";
+import { Grain } from "../shared/Storybook";
 
-const workTypeBadge: Record<string, string> = {
-  "Remote":  "bg-black-50 text-black border border-black-200",
-  "On-site": "bg-black-50 text-black border border-black-200",
-  "Hybrid":  "bg-black-50 text-black border border-black-200",
-};
+/* ────────────────────────────────────────────────
+   Experience — storybook vibe, kept simple.
+   A dashed ink timeline with numbered markers;
+   each role is written straight onto the paper,
+   separated by a thin rule.
+   ──────────────────────────────────────────────── */
 
 export default function ExperienceSection() {
+  const items = [...experiences].reverse(); // newest first
+
   return (
-    <section className="bg-white py-16" id="experience">
-      <Container>
+    <section id="experience" className="relative overflow-hidden bg-cream py-20 md:py-28">
+      <Grain tone="paper" opacity={0.6} />
+
+      <Container className="relative">
         <div className="hidden md:flex justify-end mb-6">
           <RobotStop id="experience" />
         </div>
-        <Reveal>
-          <h2 className="text-2xl md:text-4xl font-bold mb-12 text-bgColor font-space-grotesk">
-            Experience
+
+        <Reveal className="mb-14">
+          <p className="font-script text-2xl text-dusk/75 -rotate-1">where i&apos;ve been</p>
+          <h2
+            className="mt-1 font-display font-semibold lowercase leading-[0.88] text-dusk"
+            style={{ fontSize: "clamp(3.25rem, 7vw, 5.75rem)" }}
+          >
+            experience.
           </h2>
         </Reveal>
 
-        {/* Timeline wrapper */}
         <div className="relative">
+          {/* dashed ink timeline */}
+          <Grow className="absolute left-[19px] top-2 bottom-2 w-0 border-l-2 border-dashed border-dusk/30" duration={1.6} />
 
-          {/* Vertical track line — right side */}
-          <Grow className="absolute right-[19px] md:right-[23px] top-0 bottom-0 w-0.5 bg-gray-200" duration={1.4} />
+          <ol>
+            {items.map((exp, index) => (
+              <li key={exp.id} className="relative flex gap-6 md:gap-10">
+                {/* numbered marker */}
+                <Pop
+                  delay={0.1}
+                  className="relative z-10 mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-dusk bg-cream"
+                >
+                  <span className="font-display text-lg font-semibold leading-none text-dusk">
+                    {String(items.length - index).padStart(2, "0")}
+                  </span>
+                </Pop>
 
-          <div className="flex flex-col">
-            {[...experiences].reverse().map((exp, index) => (
-              <div key={exp.id} className="relative flex flex-row-reverse gap-8 md:gap-12 pb-12 last:pb-0">
-
-                {/* Node */}
-                <div className="relative z-10 flex flex-col items-center shrink-0">
-                  <Pop
-                    delay={0.15}
-                    className="w-10 h-10 rounded-full bg-bgColor border-4 border-primaryColor flex items-center justify-center shrink-0"
-                  >
-                    <span className="text-xs font-mono font-bold text-primaryColor leading-none">
-                      {String(experiences.length - index).padStart(2, "0")}
-                    </span>
-                  </Pop>
-                </div>
-
-                {/* Content */}
-                <Stagger stagger={0.09} className="flex-1 border-b border-gray-200 last:border-b-0 pb-12 last:pb-0 -mt-1">
-
-                  {/* Role + date */}
-                  <StaggerItem direction="left" className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 mb-3">
-                    <h3 className="text-lg md:text-xl font-semibold font-space-grotesk text-bgColor">
-                      {exp.role}
-                    </h3>
-                    <span className="text-sm font-mono text-gray-400 shrink-0">
-                      {exp.dateRange}
+                {/* entry, written straight on the paper */}
+                <Stagger
+                  stagger={0.07}
+                  className={`flex-1 ${index < items.length - 1 ? "mb-10 border-b border-dusk/15 pb-10" : ""}`}
+                >
+                  <StaggerItem className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between md:gap-6">
+                    <h3 className="font-display text-3xl font-semibold leading-tight text-dusk md:text-4xl">{exp.role}</h3>
+                    <span className="flex shrink-0 items-center gap-3">
+                      <span className="font-type text-sm text-dusk/70">{exp.dateRange}</span>
+                      <span className="rounded-full border border-dusk/30 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-dusk/80">
+                        {exp.workType}
+                      </span>
                     </span>
                   </StaggerItem>
 
-                  {/* Company + location + work type */}
-                  <StaggerItem direction="left" className="flex flex-wrap items-center gap-3 mb-5">
-                    {/* Company */}
-                    <span className="flex items-center gap-1.5 text-sm font-medium text-bgColor">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
-                        <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                      </svg>
-                      {exp.company}
-                    </span>
-
-                    <span className="text-gray-300">·</span>
-
-                    {/* Location */}
-                    <span className="flex items-center gap-1.5 text-sm text-gray-500">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-                      </svg>
-                      {exp.location}
-                    </span>
-
-                    <span className="text-gray-300">·</span>
-
-                    {/* Work type badge */}
-                    <span className={`text-xs font-mono font-semibold px-2.5 py-0.5 ${workTypeBadge[exp.workType]}`}>
-                      {exp.workType}
-                    </span>
-                  </StaggerItem>
-
-                  {/* Description */}
                   <StaggerItem>
-                    <p className="text-sm sm:text-base text-experiencebodyText leading-[1.8] mb-6">
-                      {exp.description}
+                    <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-dusk/70">
+                      {exp.company} · {exp.location}
                     </p>
                   </StaggerItem>
 
-                  {/* Tech tags */}
-                  <Stagger stagger={0.05} className="flex flex-wrap gap-3">
-                    {exp.technologies.map((tech) => (
-                      <StaggerTag
-                        key={tech}
-                        whileHover={{ y: -3 }}
-                        className="bg-black text-white px-4 py-1 text-sm font-mono border-b-4 border-[#DFFF00]"
-                      >
-                        {tech}
-                      </StaggerTag>
-                    ))}
-                  </Stagger>
+                  <StaggerItem>
+                    <p className="mt-4 max-w-3xl font-general-sans text-[15px] leading-[1.8] text-dusk/75">{exp.description}</p>
+                  </StaggerItem>
 
+                  <StaggerItem className="mt-4 flex flex-wrap gap-1.5">
+                    {exp.technologies.map((tech) => (
+                      <span key={tech} className="rounded-full border border-dusk/25 px-2.5 py-0.5 font-type text-xs text-dusk/80">
+                        {tech}
+                      </span>
+                    ))}
+                  </StaggerItem>
                 </Stagger>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </Container>
     </section>

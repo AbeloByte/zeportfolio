@@ -1,34 +1,32 @@
-// src/components/ContactCard.tsx
 "use client";
 
 import { ContactLink } from "@/types";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { robotHint } from "@/data/robotGuide";
 
+/** One paper index card: icon, platform in small caps, handle in typewriter. */
 export default function ContactCard({ link }: { link: ContactLink }) {
-  return (
-    <motion.a
-      href={link.url}
-      data-robot-say={robotHint.contact(link)}
-      target="_blank"
-      whileHover={{ y: -6 }}
-      whileTap={{ y: 0, scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 320, damping: 22 }}
-      className="relative flex flex-col items-center justify-center bg-black text-white p-6 md:p-8 h-28 md:h-32 w-full group shadow-[0px_4px_0px_0px_#DFFF00] hover:shadow-[0px_10px_0px_0px_#DFFF00] transition-shadow"
-    >
-      {/* Icon: Slightly smaller on mobile to save space */}
-      <motion.div
-        whileHover={{ rotate: 12 }}
-        className="absolute -top-5 left-1/2 -translate-x-1/2 w-9 h-9 md:w-10 md:h-10 bg-white border-2 border-b-primaryColor rounded-full flex items-center justify-center"
-      >
-        <Image src={link.icon} alt={link.platform} width={18} height={18} />
-      </motion.div>
+  const isEmail = link.platform === "Email";
+  const name = link.platform === "Twitter" ? "X / Twitter" : link.platform;
 
-      {/* Label: Uses 'break-all' so long emails don't break the layout on small screens */}
-      <span className="text-[10px] md:text-xs font-bold font-mono text-center break-all px-2">
-        {link.label}
+  return (
+    <a
+      href={link.url}
+      target={isEmail ? undefined : "_blank"}
+      rel={isEmail ? undefined : "noopener noreferrer"}
+      data-robot-say={robotHint.contact(link)}
+      className="group flex items-center gap-4 p-5 text-dusk transition-colors hover:bg-[#EFE3C8]"
+    >
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-dusk/20 bg-[#FBF6EA] transition-transform duration-300 group-hover:-rotate-12">
+        <Image src={link.icon} alt="" width={18} height={18} />
       </span>
-    </motion.a>
+      <span className="flex min-w-0 flex-col gap-1">
+        <span className="text-[11px] font-bold uppercase tracking-[0.22em]">{name}</span>
+        <span className="truncate font-type text-[13px] text-dusk/80">{isEmail ? link.label : "say hello"}</span>
+      </span>
+      <span aria-hidden className="ml-auto text-dusk/60 transition-transform group-hover:translate-x-1 group-hover:text-dusk">
+        →
+      </span>
+    </a>
   );
 }

@@ -71,18 +71,29 @@ export default function RobotGuide() {
 
   const [isDesktop, setIsDesktop] = useState(true);
   const [pastHero, setPastHero] = useState(false);
+  const [atFooter, setAtFooter] = useState(false); // (phones) robot steps aside for the footer
   const [section, setSection] = useState<SectionId>("home");
   const [line, setLine] = useState<{ section: SectionId; i: number }>({ section: "home", i: 0 });
   const [open, setOpen] = useState(true);
   const [hoverSay, setHoverSay] = useState<string | null>(null);
   const [idle, setIdle] = useState(false);
   const [flying, setFlying] = useState(false);
+  // Desktop: the visitor scrolled past this section's stop (long sections like
+  // Projects), so the robot waits in the screen corner instead.
+  const [docked, setDocked] = useState(false);
 
   // Re-open the card whenever the visitor reaches a new section.
   const [prevSection, setPrevSection] = useState(section);
   if (section !== prevSection) {
     setPrevSection(section);
     setOpen(true);
+  }
+
+  // Docking tucks the card away; click the robot (or hover something) to hear from it.
+  const [prevDocked, setPrevDocked] = useState(docked);
+  if (docked !== prevDocked) {
+    setPrevDocked(docked);
+    if (docked) setOpen(false);
   }
 
   const stop = guideScript[section];
@@ -110,7 +121,11 @@ export default function RobotGuide() {
 
   /* ── (phones) only show once the hero is gone ── */
   useEffect(() => {
-    const onScroll = () => setPastHero(window.scrollY > window.innerHeight * 0.55);
+    const onScroll = () => {
+      setPastHero(window.scrollY > window.innerHeight * 0.55);
+      const footer = document.querySelector("footer");
+      setAtFooter(!!footer && footer.getBoundingClientRect().top < window.innerHeight - 40);
+    };
     const raf = requestAnimationFrame(onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
@@ -118,6 +133,33 @@ export default function RobotGuide() {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  /* ── (desktop) dock in the corner once the current stop scrolls off the top ── */
+  useEffect(() => {
+    if (!isDesktop) return;
+    let raf = 0;
+    const check = () => {
+      raf = 0;
+      const el = document.querySelector<HTMLElement>(`[data-robot-stop="${section}"]`);
+      if (!el) return setDocked(false);
+      // 72px ≈ the sticky header: once the stop is hidden behind it, dock —
+      // unless the footer is on screen (the robot has said bye by then).
+      const footer = document.querySelector("footer");
+      const footerVisible = !!footer && footer.getBoundingClientRect().top < window.innerHeight - 40;
+      setDocked(el.getBoundingClientRect().bottom < 72 && !footerVisible);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(check);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [isDesktop, section]);
 
   /* ── Which section is in the middle of the screen ── */
   useEffect(() => {
@@ -195,8 +237,9 @@ export default function RobotGuide() {
       if (!placed.current || x.isAnimating() || y.isAnimating()) return;
       const pos = stopPosition(sectionRef.current);
       if (!pos) return;
-      x.set(pos.x);
-      y.set(pos.y);
+      // jump (not set) so a layout nudge doesn't register as flying
+      x.jump(pos.x);
+      y.jump(pos.y);
     };
     const ro = new ResizeObserver(fix);
     ro.observe(document.body);
@@ -281,18 +324,15 @@ export default function RobotGuide() {
 
   /* ────────── pieces ────────── */
 
-  // Card is the opposite colour of the section behind it.
-  const darkCard = isDesktop ? stop.surface === "light" : false;
-  const cardTone = darkCard
-    ? "bg-bgColor text-white border-white/10"
-    : "bg-white text-bgColor border-black";
+  // Storybook card: a cream paper note, ink text, handwritten message.
+  const cardTone = "bg-[#FBF6EA] text-dusk border-creamLine";
 
   const robot = (
     <motion.button
       type="button"
       onClick={onRobotClick}
       aria-label={showCard ? "Next tip from the tour robot" : "Open the tour robot"}
-      className="pointer-events-auto relative z-0 w-[62px] h-[72px] shrink-0 cursor-pointer rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primaryColor"
+      className="pointer-events-auto relative z-0 w-[62px] h-[72px] shrink-0 cursor-pointer rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dusk"
       whileHover={reduced ? undefined : { scale: 1.06 }}
       whileTap={reduced ? undefined : { scale: 0.92 }}
     >
@@ -300,7 +340,7 @@ export default function RobotGuide() {
       <motion.span
         aria-hidden
         style={{ opacity: speed, scaleY: speed }}
-        className="absolute left-1/2 -translate-x-1/2 top-[92%] w-4 h-8 origin-top rounded-b-full bg-gradient-to-b from-primaryColor via-primaryColor/60 to-transparent blur-[3px]"
+        className="absolute left-1/2 -translate-x-1/2 top-[92%] w-4 h-8 origin-top rounded-b-full bg-linear-to-b from-[#F2B24A] via-[#F2B24A]/60 to-transparent blur-[3px]"
       />
       <motion.div
         className="relative w-full h-full"
@@ -312,8 +352,8 @@ export default function RobotGuide() {
 
       {!showCard && (
         <span aria-hidden className="absolute top-1 right-1 flex h-3 w-3">
-          <span className="absolute inline-flex h-full w-full rounded-full bg-primaryColor opacity-75 animate-ping" />
-          <span className="relative inline-flex h-3 w-3 rounded-full bg-primaryColor border border-black" />
+          <span className="absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75 animate-ping" />
+          <span className="relative inline-flex h-3 w-3 rounded-full bg-ochre border border-dusk" />
         </span>
       )}
     </motion.button>
@@ -329,7 +369,7 @@ export default function RobotGuide() {
           exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.95 }}
           transition={{ type: "spring", stiffness: 320, damping: 26 }}
           style={isDesktop ? { height: ROBOT_CARD_H, marginTop: -ROBOT_OVERLAP } : { marginTop: -ROBOT_OVERLAP }}
-          className={`pointer-events-auto relative z-10 w-full flex flex-col border px-3.5 pt-2.5 pb-3 shadow-[4px_4px_0px_0px_rgba(223,255,0,1)] transition-colors duration-500 ${cardTone}`}
+          className={`pointer-events-auto relative z-10 w-full flex flex-col rounded-md border px-4 pt-2.5 pb-3 shadow-[0_14px_30px_-16px_rgba(19,40,58,0.55)] ${cardTone}`}
         >
           <button
             type="button"
@@ -338,14 +378,14 @@ export default function RobotGuide() {
               setHoverSay(null);
             }}
             aria-label="Close robot message"
-            className="absolute top-1.5 right-1.5 p-1 leading-none transition-opacity opacity-40 hover:opacity-100"
+            className="absolute top-1.5 right-1.5 p-1 leading-none text-dusk transition-opacity opacity-40 hover:opacity-100"
           >
             <svg width="10" height="10" viewBox="0 0 12 12" aria-hidden>
               <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.6" />
             </svg>
           </button>
 
-          <p aria-hidden className="font-space-grotesk text-[13px] leading-snug line-clamp-2 flex-1 pr-4">
+          <p aria-hidden className="font-script text-[19px] leading-[1.15] line-clamp-2 flex-1 pr-4">
             {typed}
             {!done && (
               <span className="inline-block w-[2px] h-[1em] bg-current ml-0.5 align-[-0.15em] animate-pulse" />
@@ -362,20 +402,18 @@ export default function RobotGuide() {
                   stop.lines.map((_, i) => (
                     <span
                       key={i}
-                      className={`h-1 transition-all duration-300 ${
-                        i === lineIndex ? "w-4 bg-primaryColor" : `w-1.5 ${darkCard ? "bg-white/25" : "bg-black/20"}`
+                      className={`h-1 rounded-full transition-all duration-300 ${
+                        i === lineIndex ? "w-4 bg-dusk" : "w-1.5 bg-dusk/20"
                       }`}
                     />
                   ))}
               </div>
-              <div className="flex gap-1.5">
+              <div className="flex gap-4">
                 {stop.actions.map((a) => (
                   <a
                     key={a.href + a.label}
                     href={a.href}
-                    className={`whitespace-nowrap text-[11px] font-mono px-2 py-1 border-b-2 border-primaryColor hover:-translate-y-0.5 transition-transform ${
-                      darkCard ? "bg-white text-bgColor" : "bg-bgColor text-white"
-                    }`}
+                    className="whitespace-nowrap border-b border-dusk/40 pb-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-dusk transition-colors hover:border-dusk"
                   >
                     {a.label}
                   </a>
@@ -388,32 +426,12 @@ export default function RobotGuide() {
     </AnimatePresence>
   );
 
-  /* ── Desktop: flies between section stops ── */
-  if (isDesktop) {
-    return (
-      <motion.aside
-        aria-label="Tour guide robot"
-        className="absolute top-0 left-0 z-30 flex flex-col items-center pointer-events-none"
-        style={{ x, y, width: ROBOT_STOP_W, height: ROBOT_H - ROBOT_OVERLAP + ROBOT_CARD_H, opacity: ready }}
-      >
-        <motion.div style={{ rotate: tilt }} className="flex justify-center">
-          {robot}
-        </motion.div>
-        <motion.div style={{ opacity: cardOpacity }} className="w-full">
-          {card}
-        </motion.div>
-      </motion.aside>
-    );
-  }
-
-  /* ── Phones: waits in the corner ── */
-  return (
-    <AnimatePresence>
-      {pastHero && (
-        <motion.aside
-          key="robot-corner"
+  /** The robot waiting in the bottom-right corner of the screen. */
+  const corner = (key: string, sizeClass: string) => (
+    <motion.aside
+          key={key}
           aria-label="Tour guide robot"
-          className="fixed bottom-4 right-4 z-30 flex flex-col items-end pointer-events-none w-[min(240px,calc(100vw-32px))]"
+          className={`fixed z-30 flex flex-col items-end pointer-events-none ${sizeClass}`}
           initial={reduced ? { opacity: 0 } : { opacity: 0, y: 120, scale: 0.6 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={reduced ? { opacity: 0 } : { opacity: 0, y: 120, scale: 0.6 }}
@@ -421,8 +439,36 @@ export default function RobotGuide() {
         >
           <div className="mr-2">{robot}</div>
           {showCard && <div className="w-full">{card}</div>}
+    </motion.aside>
+  );
+
+  /* ── Desktop: flies between section stops; docks in the corner in long sections ── */
+  if (isDesktop) {
+    return (
+      <>
+        <motion.aside
+          aria-label="Tour guide robot"
+          aria-hidden={docked || undefined}
+          inert={docked}
+          className="absolute top-0 left-0 z-30 flex flex-col items-center pointer-events-none"
+          style={{ x, y, width: ROBOT_STOP_W, height: ROBOT_H - ROBOT_OVERLAP + ROBOT_CARD_H, opacity: docked ? 0 : ready }}
+        >
+          <motion.div style={{ rotate: tilt }} className="flex justify-center">
+            {robot}
+          </motion.div>
+          <motion.div style={{ opacity: cardOpacity }} className="w-full">
+            {card}
+          </motion.div>
         </motion.aside>
-      )}
+        <AnimatePresence>{docked && corner("robot-dock", "bottom-6 right-6 w-[300px]")}</AnimatePresence>
+      </>
+    );
+  }
+
+  /* ── Phones: waits in the corner ── */
+  return (
+    <AnimatePresence>
+      {pastHero && !atFooter && corner("robot-corner", "bottom-4 right-4 w-[min(240px,calc(100vw-32px))]")}
     </AnimatePresence>
   );
 }

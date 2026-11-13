@@ -10,7 +10,7 @@ import RobotGuide from "@/components/shared/RobotGuide";
 
 export default function Home() {
   return (
-    <div className="bg-bgColor font-sans selection:bg-[#DFFF00]/80">
+    <div className="bg-page font-sans">
       <Header />
       <Hero />
       <About />

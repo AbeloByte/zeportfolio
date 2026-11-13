@@ -29,15 +29,18 @@ interface RobotAvatarProps {
   className?: string;
 }
 
-// Palette — matched to the original robot art, glow uses the site's primary.
+// Palette — matched to the storybook illustrations: warm white shell,
+// teal trim, bold ink outlines, green-lime glowing face.
 const C = {
-  shellLight: "#FBFDFD",
-  shellDark: "#BFD5D4",
-  teal: "#5E9F9B",
-  tealDark: "#2F6763",
-  visor: "#0A1414",
-  glow: "#DFFF00",
+  shellLight: "#FBFAF4",
+  shellDark: "#C9D5D0",
+  outline: "#1D2B33", // ink outline, like the hand-drawn art
+  teal: "#3F8E92",
+  tealDark: "#215A5F",
+  visor: "#0B1416",
+  glow: "#C8F54A",
 };
+const INK = 2.2; // outline weight (viewBox units)
 
 // Arm rotation (deg) per pose. 0 = hanging straight down.
 const ARMS: Record<RobotPose, { left: number; right: number | "wave" }> = {
@@ -66,9 +69,9 @@ function Arm({ x, y, rotate, wave, ids }: {
         transition: "transform 550ms cubic-bezier(.34,1.56,.64,1)",
       }}
     >
-      <rect x={x - 4.5} y={y} width={9} height={22} rx={4.5} fill={`url(#${ids.shell})`} stroke={C.shellDark} strokeWidth={1} />
+      <rect x={x - 4.5} y={y} width={9} height={22} rx={4.5} fill={`url(#${ids.shell})`} stroke={C.outline} strokeWidth={INK} />
       <circle cx={x} cy={y + 11} r={2.6} fill={C.teal} />
-      <circle cx={x} cy={y + 26} r={6} fill={`url(#${ids.shell})`} stroke={C.shellDark} strokeWidth={1} />
+      <circle cx={x} cy={y + 26} r={6} fill={`url(#${ids.shell})`} stroke={C.outline} strokeWidth={INK} />
       <path d={`M${x - 3} ${y + 29} q3 2 6 0`} stroke={C.teal} strokeWidth={1} fill="none" strokeLinecap="round" />
     </g>
   );
@@ -158,11 +161,11 @@ export default function RobotAvatar({
       </defs>
 
       {/* ── Body ── */}
-      <rect x="52" y="84" width="16" height="8" rx="2" fill={C.shellDark} />
-      <ellipse cx="60" cy="112" rx="24" ry="22" fill={`url(#${ids.shell})`} stroke={C.shellDark} strokeWidth="1" />
-      <path d="M44 100 Q60 95 76 100" stroke={C.shellDark} strokeWidth="1" fill="none" />
+      <rect x="52" y="84" width="16" height="8" rx="2" fill={C.tealDark} stroke={C.outline} strokeWidth={INK} />
+      <ellipse cx="60" cy="112" rx="24" ry="22" fill={`url(#${ids.shell})`} stroke={C.outline} strokeWidth={INK} />
+      <path d="M44 100 Q60 95 76 100" stroke={C.outline} strokeWidth="1.2" fill="none" opacity="0.6" />
       {/* chest panel */}
-      <rect x="47" y="106" width="26" height="10" rx="5" fill={C.visor} stroke={C.teal} strokeWidth="1" />
+      <rect x="47" y="106" width="26" height="10" rx="5" fill={C.visor} stroke={C.outline} strokeWidth="1.6" />
       <g filter={`url(#${ids.glow})`}>
         <circle className="robot-led" cx="53" cy="111" r="1.8" fill={C.glow} />
         <path d="M61 109h6M61 111h6M61 113h6" stroke={C.glow} strokeWidth="1" opacity="0.7" />
@@ -178,17 +181,17 @@ export default function RobotAvatar({
           }}
         >
           {/* ear pods */}
-          <ellipse cx="17" cy="52" rx="7" ry="12" fill={`url(#${ids.ear})`} />
-          <ellipse cx="103" cy="52" rx="7" ry="12" fill={`url(#${ids.ear})`} />
+          <ellipse cx="17" cy="52" rx="7" ry="12" fill={`url(#${ids.ear})`} stroke={C.outline} strokeWidth={INK} />
+          <ellipse cx="103" cy="52" rx="7" ry="12" fill={`url(#${ids.ear})`} stroke={C.outline} strokeWidth={INK} />
           <ellipse cx="15" cy="52" rx="3" ry="7" fill={C.shellLight} opacity="0.85" />
           <ellipse cx="105" cy="52" rx="3" ry="7" fill={C.shellLight} opacity="0.85" />
 
           {/* helmet */}
-          <ellipse cx="60" cy="50" rx="42" ry="38" fill={`url(#${ids.shell})`} stroke={C.shellDark} strokeWidth="1" />
+          <ellipse cx="60" cy="50" rx="42" ry="38" fill={`url(#${ids.shell})`} stroke={C.outline} strokeWidth={INK} />
           <path d="M30 26 Q44 14 62 13" stroke="#fff" strokeWidth="4" strokeLinecap="round" fill="none" opacity="0.9" />
 
           {/* visor */}
-          <ellipse cx="60" cy="54" rx="34" ry="25" fill={C.teal} />
+          <ellipse cx="60" cy="54" rx="34" ry="25" fill={C.teal} stroke={C.outline} strokeWidth="1.8" />
           <ellipse cx="60" cy="54" rx="31" ry="22" fill={C.visor} />
 
           {/* face */}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Sofia_Sans_Extra_Condensed, Caveat, Courier_Prime } from "next/font/google";
 
 const generalSans = localFont({
   src: [
@@ -19,6 +19,26 @@ export const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
 });
 
+// Storybook hero: tall condensed headline, handwritten notes, typewriter labels.
+const display = Sofia_Sans_Extra_Condensed({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
+  variable: "--font-display-src",
+});
+const script = Caveat({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-script-src",
+});
+const typewriter = Courier_Prime({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-type-src",
+});
+
 export const metadata: Metadata = {
   title: "Abel Adane | Portfolio",
   description: "Personal portfolio of Abel Adane — Full Stack Web Developer & Junior UI/UX Designer",
@@ -32,7 +52,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${spaceGrotesk.className} ${generalSans.variable} bg-bgColor text-textColor`}>
+      <body className={`${spaceGrotesk.variable} ${spaceGrotesk.className} ${generalSans.variable} ${display.variable} ${script.variable} ${typewriter.variable} bg-page text-ink`}>
         {children}
       </body>
     </html>
