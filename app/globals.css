@@ -133,8 +133,8 @@ body {
 /* ── Scrollbar ─────────────────────────────────── */
 
 ::selection {
-  background-color: #DFFF00;
-  color: #0E0E0E;
+  background-color: #C79A46; /* ochre — reads on sky, cream and navy */
+  color: #13283A;            /* dusk */
 }
 
 @media (min-width: 768px) {
