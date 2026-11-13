@@ -7,13 +7,13 @@ import {
   useMotionValue,
   useMotionValueEvent,
   useReducedMotion,
-  useSpring,
+  animate,
   useTransform,
   useVelocity,
 } from "framer-motion";
 import { guideScript, type Pose, type SectionId } from "@/data/robotGuide";
 import RobotAvatar, { type RobotFace } from "./RobotAvatar";
-import { ROBOT_CARD_H, ROBOT_H, ROBOT_OVERLAP, ROBOT_STOP_W } from "./RobotStop";
+import { ROBOT_CARD_H, ROBOT_H, ROBOT_OVERLAP, ROBOT_STOP_H, ROBOT_STOP_W } from "./RobotStop";
 
 /* ────────────────────────────────────────────────
    RobotGuide — one robot that tours the whole page.
@@ -35,6 +35,16 @@ const HOVER_DWELL_MS = 500; // cursor must rest this long before the robot comme
 const HINT_MIN_MS = 2_500; // a hint stays at least this long before the next one
 const HINT_LINGER_MS = 1_200; // keep the hint briefly after the cursor leaves
 const TYPE_SPEED_MS = 40; // per character
+const FLIGHT_S = 1.6; // seconds for the robot to fly to a new section (higher = calmer)
+
+/** Page coordinates of a section's <RobotStop />, or null if it isn't laid out. */
+function stopPosition(section: string) {
+  const el = document.querySelector<HTMLElement>(`[data-robot-stop="${section}"]`);
+  if (!el) return null;
+  const r = el.getBoundingClientRect();
+  if (r.width === 0) return null;
+  return { x: r.left + window.scrollX, y: r.top + window.scrollY };
+}
 
 /** Types `text` out one character at a time; holds still while `paused`. */
 function useTypewriter(text: string, { instant, paused }: { instant: boolean; paused: boolean }, speed = TYPE_SPEED_MS) {
@@ -125,12 +135,11 @@ export default function RobotGuide() {
   }, []);
 
   /* ── Flight: follow the current section's stop ── */
-  const targetX = useMotionValue(0);
-  const targetY = useMotionValue(0);
-  const x = useSpring(targetX, { stiffness: 50, damping: 13, mass: 1 });
-  const y = useSpring(targetY, { stiffness: 50, damping: 13, mass: 1 });
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
   const ready = useMotionValue(0);
   const placed = useRef(false);
+  const sectionRef = useRef(section);
 
   const vx = useVelocity(x);
   const vy = useVelocity(y);
@@ -143,33 +152,60 @@ export default function RobotGuide() {
     else if (v < 0.05 && flying) setFlying(false);
   });
 
+  // A new section → fly there. The previous stop is usually far off-screen,
+  // so first slip (invisibly) to just outside the screen edge, then make a
+  // short, fixed-length flight in. Same calm pace however far apart sections are.
+  useEffect(() => {
+    sectionRef.current = section;
+    if (!isDesktop) return;
+    const pos = stopPosition(section);
+    if (!pos) return;
+
+    if (!placed.current || reduced) {
+      x.jump(pos.x);
+      y.jump(pos.y);
+      placed.current = true;
+      ready.set(1);
+      return;
+    }
+
+    const viewTop = window.scrollY;
+    const viewBottom = viewTop + window.innerHeight;
+    const fromY = y.get();
+    const offScreen = fromY + ROBOT_STOP_H < viewTop || fromY > viewBottom;
+    if (offScreen) {
+      const comingFromAbove = fromY < pos.y;
+      y.jump(comingFromAbove ? viewTop - ROBOT_STOP_H : viewBottom);
+    }
+
+    // ease-in-out: gentle take-off, steady cruise, soft landing
+    const flight = { duration: FLIGHT_S, ease: [0.45, 0, 0.25, 1] } as const;
+    const ax = animate(x, pos.x, flight);
+    const ay = animate(y, pos.y, flight);
+    return () => {
+      ax.stop();
+      ay.stop();
+    };
+  }, [section, isDesktop, reduced, x, y, ready]);
+
+  // Layout changed (resize, images loading) → snap to the stop, unless mid-flight.
   useEffect(() => {
     if (!isDesktop) return;
-    const place = () => {
-      const el = document.querySelector<HTMLElement>(`[data-robot-stop="${section}"]`);
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      if (r.width === 0) return;
-      const tx = r.left + window.scrollX;
-      const ty = r.top + window.scrollY;
-      targetX.set(tx);
-      targetY.set(ty);
-      if (!placed.current || reduced) {
-        x.jump(tx);
-        y.jump(ty);
-        placed.current = true;
-      }
-      ready.set(1);
+    const fix = () => {
+      if (!placed.current || x.isAnimating() || y.isAnimating()) return;
+      const pos = stopPosition(sectionRef.current);
+      if (!pos) return;
+      x.set(pos.x);
+      y.set(pos.y);
     };
-    place();
-    const ro = new ResizeObserver(place);
+    const ro = new ResizeObserver(fix);
     ro.observe(document.body);
-    window.addEventListener("resize", place);
+    window.addEventListener("resize", fix);
     return () => {
       ro.disconnect();
-      window.removeEventListener("resize", place);
+      window.removeEventListener("resize", fix);
     };
-  }, [section, isDesktop, reduced, targetX, targetY, x, y, ready]);
+  }, [isDesktop, x, y]);
 
   /* ── Hover hints: anything with data-robot-say ──
      Calm by design: the cursor has to rest on an item before the
